@@ -15,6 +15,7 @@ function App() {
         </div>
 
         <div className="wrap">
+
             <div className="container">
                 <div className="main">
                     <h2 className = "title"> 직업 가치관 검사 </h2>
@@ -61,7 +62,13 @@ function App() {
                     </label>
                 </div>
 
+                <div className="startbtn">
+                <button className="start">시작하기</button>
+                </div>
+
             </div>
+
+
         </div>
 
     </div>
