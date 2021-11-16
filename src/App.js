@@ -11,7 +11,7 @@ function App() {
     <div>
 
         <div className="nav">
-            <div className="nav2 container">* elice */ front-end project</div>
+            <div className="nav2 container"> /* elice */ front-end project</div>
         </div>
 
         <div className="wrap">
