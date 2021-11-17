@@ -45,6 +45,11 @@ const Home = props => {
 
 
             <div className = "Q">
+                <h3> 당신의 이름을 입력해주세요. </h3>
+                <input className = "inputName" type="text" />
+            </div>
+
+            <div className = "Q">
                 <h3> 당신의 나이를 입력해주세요. </h3>
                 <input className = "inputName" type="text" />
             </div>
@@ -68,7 +73,7 @@ const Home = props => {
             </div>
 
             <div className="startbtn">
-                <button className="start"> 시작하기</button>
+                <button className="start" onClick={() => {history.push("/guide");}}> 시작하기</button>
             </div>
 
             </div>
