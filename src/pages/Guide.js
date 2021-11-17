@@ -20,16 +20,16 @@ const Guide = props => {
                 </div>
 
                 <div>
-                    <h2 className = "title2">아래의 질문에 응답해주세요.</h2>
+                    <h3 className = "title2">아래의 질문에 응답해주세요.</h3>
                     <hr class="foo" />
                     <div className="Q2">
 
                         <div className="number">
-                            <h3>Q1.</h3>
+                            <h4>Q1.</h4>
                         </div>
 
                         <div>
-                            <h3>두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h3>
+                            <h4>두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h4>
                         </div>
                     </div>
 

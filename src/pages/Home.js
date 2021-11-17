@@ -12,7 +12,9 @@
 // export default Home;
 
 
-import React from 'react';
+import React, { useState } from 'react';
+
+
 
 const Home = props => {
     const { history } = props;
@@ -45,32 +47,49 @@ const Home = props => {
 
 
             <div className = "Q">
-                <h3> 당신의 이름을 입력해주세요. </h3>
-                <input className = "inputName" type="text" />
+                <h5> 당신의 이름을 입력해주세요. </h5>
+                <input
+                    name="name"
+                    className = "inputName"
+                    type="text" />
             </div>
 
             <div className = "Q">
-                <h3> 당신의 나이를 입력해주세요. </h3>
-                <input className = "inputName" type="text" />
+                <h5> 당신의 나이를 입력해주세요. </h5>
+                <input
+                    name ="age"
+                    className = "inputName"
+                    type="text" />
             </div>
 
             <div className = "Q">
-                <h3> 당신의 성별을 선택해주세요. </h3>
+                <h5> 당신의 성별을 선택해주세요. </h5>
             </div>
 
-            <div className="cntr">
-                <label for="opt1" class="radio">
-                <input type="radio" name="rdo" id="opt1" class="hidden"/>
-                <span className="label">남자</span>
-                </label>
-            </div>
+            <form>
 
-            <div className="cntr">
-                <label for="opt1" class="radio">
-                <input type="radio" name="rdo" id="opt1" class="hidden"/>
-                <span className="label">여자</span>
-                </label>
-            </div>
+
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            name="rdo"
+                            className="hidden"/>
+                        <span className="label">남자</span>
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            name="rdo"
+                            class="hidden"/>
+                        <span className="label">여자</span>
+                    </label>
+                </div>
+
+            </form>
 
             <div className="startbtn">
                 <button className="start" onClick={() => {history.push("/guide");}}> 다음으로</button>
