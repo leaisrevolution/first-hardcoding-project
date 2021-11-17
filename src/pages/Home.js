@@ -27,7 +27,7 @@ const Home = props => {
         <div className="wrap">
             <div className="container">
                 <div className="main">
-                <h2 className = "title"> 직업 가치관 검사 </h2>
+                <h1 className = "title"> 직업 가치관 검사 </h1>
                 <p className = "content"> 당신의 직업 검사 진행을 통해 <br/> 나와 맞는 직업과 직업 가치관, 적합도가 높은 직업을 탐색해봅시다.</p>
             </div>
 
@@ -73,7 +73,7 @@ const Home = props => {
             </div>
 
             <div className="startbtn">
-                <button className="start" onClick={() => {history.push("/guide");}}> 시작하기</button>
+                <button className="start" onClick={() => {history.push("/guide");}}> 다음으로</button>
             </div>
 
             </div>

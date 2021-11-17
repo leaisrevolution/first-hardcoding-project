@@ -109,7 +109,7 @@
 
 
 .startbtn {
-  margin: 80px 0 100px;
+  margin: 50px 0 100px;
   position: relative;
   left: 85%;
   max-width: 600px;
@@ -161,7 +161,7 @@
   text-decoration: none;
 
   display: inline-block;
-  background-color: rgb(99, 99, 160);
+  background-color: rgb(118, 118, 118);
   color: white;
   width: auto;
 
@@ -172,4 +172,16 @@
 
 .label {
   color: rgb(118, 118, 118)
+}
+
+.Q2 {
+  margin-top: 30px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  color: rgb(118, 118, 118);
+}
+
+.number {
+  color: rgb(210, 210, 210);
 }
