@@ -83,6 +83,11 @@
   color: rgb(118, 118, 118);
 }
 
+.foo2 {
+  margin-top: 30px;
+  color: rgb(118, 118, 118);
+}
+
 .Q {
   margin-top: 30px;
   color : rgb(118, 118, 118);
@@ -116,7 +121,7 @@
 }
 
 .bar {
-  margin-top: px;
+  margin-top: 10px;
   width: 580px;
   display: flex;
   justify-content: left;
@@ -124,7 +129,7 @@
 }
 
 #btn {
-  margin-top: 70px;
+  margin-top: 50px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -253,7 +258,7 @@
 
 .qustionHeader {
   margin-top: 50px;
-  color: rgb(201, 201, 201);
+  color: rgb(87, 107, 205);
 }
 
 .qustionText {

@@ -75,29 +75,6 @@ const Home = props => {
 
 
 
-            {/* <form>
-
-                <div>
-                    <label>
-                        <input
-                            type="radio"
-                            name="rdo"
-                            className="hidden"/>
-                        <span className="label">남자</span>
-                    </label>
-                </div>
-
-                <div>
-                    <label>
-                        <input
-                            type="radio"
-                            name="rdo"
-                            class="hidden"/>
-                        <span className="label">여자</span>
-                    </label>
-                </div>
-
-            </form> */}
 
             <div className="startbtn">
                 <button className="start" onClick={() => {history.push("/guide");}}> 다음으로</button>

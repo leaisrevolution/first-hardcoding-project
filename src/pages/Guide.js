@@ -6,24 +6,12 @@ import ProgressBar from "./ProgressBar.js";
 
 const Guide = props => {
 
-    // export var ProgressBar = ({width, percent}) => {
-    //     let progress = percent * width;
-
-    //     return (
-    //         <div className="progress-div" style={{width: width}}>
-    //             <div style={{width: `${progress}px`}}className="progress"/>
-    //         </div>
-    //     )
-    // }
-
     const testData = [
         { bgcolor: "#5b6ac7", completed: 10 }];
     const { history } = props;
 
     return (
         <div>
-
-
 
         <div className="nav">
             <div className="nav2 container"> /* elice */ front-end project</div>
@@ -49,21 +37,26 @@ const Guide = props => {
 
 
                     <div className="questionSection">
-                        <h4 className="qustionHeader">
-                            <span>Q1</span>
-                        </h4>
 
-                        <div className="qustionText">
-                            <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                        <div>
+                            <h4 className="qustionHeader">
+                                <span>Q1</span>
+                            </h4>
+
+                            <div className="qustionText">
+                                <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                            </div>
+
+                            <div className="answerBtn">
+                                <button>능력발휘</button>
+                                <button>자율성</button>
+                            </div>
                         </div>
 
-                        <div className="answerBtn">
-                            <button>능력발휘</button>
-                            <button>자율성</button>
-                        </div>
 
                     </div>
 
+                    <hr class="foo2" />
 
                 </div>
 
