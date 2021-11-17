@@ -17,7 +17,7 @@ const Guide = props => {
     // }
 
     const testData = [
-        { bgcolor: "#5b6ac7", completed: 50 }];
+        { bgcolor: "#5b6ac7", completed: 10 }];
     const { history } = props;
 
     return (
@@ -40,25 +40,33 @@ const Guide = props => {
                 <div>
                     <h3 className = "title2">아래의 질문에 응답해주세요.</h3>
                     <hr class="foo" />
-                    <div className="Q2">
 
-                        <div className="number">
-                            <h4>Q1.</h4>
+                    <div className="bar">
+                    {testData.map((item, idx) => (
+                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+                        ))}
+                    </div>
+
+
+                    <div className="questionSection">
+                        <h4 className="qustionHeader">
+                            <span>Q1</span>
+                        </h4>
+
+                        <div className="qustionText">
+                            <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                         </div>
 
-                        <div>
-                            <h5>두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                        <div className="answerBtn">
+                            <button>능력발휘</button>
+                            <button>자율성</button>
                         </div>
+
                     </div>
 
 
                 </div>
 
-                <div className="bar">
-                    {testData.map((item, idx) => (
-                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-                        ))}
-                </div>
 
 
 
@@ -69,7 +77,7 @@ const Guide = props => {
                 </div>
 
                 <div>
-                    <button className="start" onClick={() => {history.push("/test");}}> 시작하기</button>
+                    <button className="start" onClick={() => {history.push("/test");}}> 검사시작</button>
                 </div>
 
             </div>

@@ -35,7 +35,7 @@ const Home = props => {
             </div>
 
             <div>
-                <h2 className = "title2">당신에 대해서 알려주세요.</h2>
+                <h3 className = "title2">당신에 대해서 알려주세요.</h3>
                 <hr class="foo" />
 
 
@@ -48,7 +48,7 @@ const Home = props => {
 
 
             <div className = "Q">
-                <h5> 당신의 이름을 입력해주세요. </h5>
+                <h5> Q1.당신의 이름을 입력해주세요. </h5>
                 <input
                     name="name"
                     className = "inputName"
@@ -56,7 +56,7 @@ const Home = props => {
             </div>
 
             <div className = "Q">
-                <h5> 당신의 나이를 입력해주세요. </h5>
+                <h5> Q2.당신의 나이를 입력해주세요. </h5>
                 <input
                     name ="age"
                     className = "inputName"
@@ -64,7 +64,7 @@ const Home = props => {
             </div>
 
             <div className = "Q">
-                <h5> 당신의 성별을 선택해주세요. </h5>
+                <h5> Q3.당신의 성별을 선택해주세요. </h5>
             </div>
 
             <select className = "gender">

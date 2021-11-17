@@ -84,7 +84,7 @@
 }
 
 .Q {
-  margin-top: 50px;
+  margin-top: 30px;
   color : rgb(118, 118, 118);
 
 }
@@ -92,7 +92,7 @@
 .inputName {
   margin-top: 10px;
   width: 300px;
-  height: 50px;
+  height: 45px;
   border-radius: 5px;
   border: solid 1px rgb(225, 224, 224);
 }
@@ -100,7 +100,7 @@
 .gender {
   margin-top: 10px;
   width: 300px;
-  height: 50px;
+  height: 45px;
   border: solid 1px rgb(225, 224, 224);
   border-radius: 5px;
 }
@@ -112,10 +112,11 @@
 
 .content {
   margin-top: 0.95rem;
+  color: rgb(84, 84, 84);
 }
 
 .bar {
-  margin-top: 30px;
+  margin-top: px;
   width: 580px;
   display: flex;
   justify-content: left;
@@ -123,7 +124,7 @@
 }
 
 #btn {
-  margin-top: 150px;
+  margin-top: 70px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -186,7 +187,7 @@
   text-decoration: none;
 
   display: inline-block;
-  background-color: rgb(118, 118, 118);
+  background-color: rgb(201, 201, 201);
   color: white;
   width: auto;
 
@@ -219,8 +220,61 @@
 }
 
 .progress {
-  background-color: rgb(62, 122, 235);
+  background-color: rgb(87, 107, 205);
   height: 10px;
   border-radius: 1rem;
 }
 
+.selectbtn {
+  display: flex;
+}
+
+
+.questionSection {
+  margin-top: 50px;
+}
+
+.qustionText{
+  margin-top: 30px;
+}
+
+.answerBtn{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.questionSection {
+  margin-top: 20px;
+}
+
+.qustionHeader {
+  margin-top: 50px;
+  color: rgb(201, 201, 201);
+}
+
+.qustionText {
+  color:rgb(84, 84, 84);
+}
+
+button {
+  font-size: 16px;
+  color: #ffffff;
+  background-color: rgb(201, 201, 201);
+  border-radius: 8px;
+  border: 0px;
+  height: 46px;
+  padding: 4px;
+  margin: 2px;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+  font-weight: 700;
+}
+
+button:hover {
+  background-color: rgb(87, 107, 205);
+}
