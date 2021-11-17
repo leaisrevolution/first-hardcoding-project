@@ -1,9 +1,22 @@
+// import React from "react";
+
+// const Home = props => {
+//     const { history } = props;
+//     return (
+//         <div>
+//             <button onClick={() => {history.push("/test");}}>검사시작</button>
+//         </div>
+//     );
+// };
+
+// export default Test;
+
+
+
 
 import React from 'react';
-import testStart from './testStart';
 
-
-const testMain = () => {
+const Test = () => {
     return (
         <div>
 
@@ -28,5 +41,4 @@ const testMain = () => {
     );
 }
 
-
-export default testStart;
+export default Test;
