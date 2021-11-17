@@ -4,6 +4,9 @@ import React from 'react';
 const Guide = props => {
 
     const { history } = props;
+
+
+
     return (
         <div>
 
@@ -29,7 +32,7 @@ const Guide = props => {
                         </div>
 
                         <div>
-                            <h4>두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h4>
+                            <h5>두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                         </div>
                     </div>
 

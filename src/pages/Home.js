@@ -16,6 +16,7 @@ import React, { useState } from 'react';
 
 
 
+
 const Home = props => {
     const { history } = props;
     return (
@@ -34,7 +35,7 @@ const Home = props => {
             </div>
 
             <div>
-                <h2 className = "title2">당신에 대해서 알려주세요</h2>
+                <h2 className = "title2">당신에 대해서 알려주세요.</h2>
                 <hr class="foo" />
 
 
@@ -66,8 +67,15 @@ const Home = props => {
                 <h5> 당신의 성별을 선택해주세요. </h5>
             </div>
 
-            <form>
+            <select className = "gender">
+                <option className ="genderSelet">선택</option>
+                <option value="남자">남자</option>
+                <option value="여자">여자</option>
+            </select>
 
+
+
+            {/* <form>
 
                 <div>
                     <label>
@@ -89,7 +97,7 @@ const Home = props => {
                     </label>
                 </div>
 
-            </form>
+            </form> */}
 
             <div className="startbtn">
                 <button className="start" onClick={() => {history.push("/guide");}}> 다음으로</button>
