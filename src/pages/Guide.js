@@ -1,15 +1,4 @@
-// import React from "react";
 
-// const Home = props => {
-//     const { history } = props;
-//     return (
-//         <div>
-//             <button onClick={() => {history.push("/test");}}>검사시작</button>
-//         </div>
-//     );
-// };
-
-// export default Test;
 import React from 'react';
 
 const Guide = props => {
