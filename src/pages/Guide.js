@@ -1,14 +1,29 @@
 
 import React from 'react';
+import ProgressBar from "./ProgressBar.js";
+
+
 
 const Guide = props => {
 
+    // export var ProgressBar = ({width, percent}) => {
+    //     let progress = percent * width;
+
+    //     return (
+    //         <div className="progress-div" style={{width: width}}>
+    //             <div style={{width: `${progress}px`}}className="progress"/>
+    //         </div>
+    //     )
+    // }
+
+    const testData = [
+        { bgcolor: "#5b6ac7", completed: 50 }];
     const { history } = props;
-
-
 
     return (
         <div>
+
+
 
         <div className="nav">
             <div className="nav2 container"> /* elice */ front-end project</div>
@@ -36,8 +51,14 @@ const Guide = props => {
                         </div>
                     </div>
 
+
                 </div>
 
+                <div className="bar">
+                    {testData.map((item, idx) => (
+                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+                        ))}
+                </div>
 
 
 

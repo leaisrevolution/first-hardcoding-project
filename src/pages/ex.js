@@ -1,5 +1,9 @@
+import ProgressBar from "./pages/ProgressBar.js";
+const testData = [{ bgcolor: "#6a1b9a", completed: 60 }];
 
-
+{testData.map((item, idx) => (
+    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+))}
 
 <div _ngcontent-fjx-c58="" class="horizontal-question-wrapper">
 <div _ngcontent-fjx-c58="" class="question-number">Q1</div>

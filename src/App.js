@@ -5,6 +5,8 @@ import Home from "./pages/Home.js";
 import Guide from "./pages/Guide.js";
 import Test from "./pages/Test.js";
 
+
+
 function App() {
     return (
         <div className="App">
@@ -13,9 +15,12 @@ function App() {
                 <Route exact path="/guide" component={Guide} />
                 <Route exact path="/test" component={Test} />
             </BrowserRouter>
+
         </div>
     );
 }
+
+
 
 export default App;
 
