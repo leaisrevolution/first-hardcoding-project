@@ -53,18 +53,18 @@
 
 .nav {
 
-    background: rgb(87, 107, 205);
+    background: #2884f7;
     color: white;
     font-weight: 500;
     font-size: 20px;
     box-sizing: border-box;
-    padding: 10px 20px 10px;
+    padding: 6px 20px 6px;
 }
 
 
 .title {
   margin-top: 90px;
-  color: rgb(87, 107, 205);
+  color: #2884f7;
 }
 
 
@@ -74,7 +74,7 @@
 
 .title2 {
   margin-top: 100px;
-  color: rgb(87, 107, 205);
+  color: #2884f7;
 
 }
 
@@ -101,9 +101,6 @@
   border: solid 1px rgb(225, 224, 224);
 }
 
-Select {
-  height: "30"
-}
 
 .gender {
   margin-top: 20px;
@@ -163,7 +160,7 @@ Select {
   text-decoration: none;
 
   display: inline-block;
-  background-color: rgb(87, 107, 205);
+  background-color: #2884f7;
   color: white;
   width: auto;
 
@@ -227,7 +224,7 @@ Select {
 }
 
 .progress {
-  background-color: rgb(87, 107, 205);
+  background-color: #2884f7;
   height: 10px;
   border-radius: 1rem;
 }
@@ -260,7 +257,7 @@ Select {
 
 .qustionHeader {
   margin-top: 50px;
-  color: rgb(87, 107, 205);
+  color: #2884f7;
 }
 
 .qustionText {
@@ -283,5 +280,5 @@ button {
 }
 
 button:hover {
-  background-color: rgb(87, 107, 205);
+  background-color: #2884f7;
 }

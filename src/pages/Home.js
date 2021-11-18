@@ -2,7 +2,6 @@
 import React, { useState, Component } from 'react';
 import Select from 'react-select';
 import { render } from '@testing-library/react';
-// import React, { useState } from 'react';
 
 
 const options = [
@@ -124,7 +123,6 @@ const Home = (props) => {
 
                 <div className = "gender">
                         <Select
-
                         value={selectedOption}
                         onChange={handleChange}
                         options={options}

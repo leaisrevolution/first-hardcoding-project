@@ -7,7 +7,7 @@ import ProgressBar from "./ProgressBar.js";
 const Guide = props => {
 
     const testData = [
-        { bgcolor: "#5b6ac7", completed: 10 }];
+        { bgcolor: "#2884f7", completed: 10 }];
     const { history } = props;
 
 
