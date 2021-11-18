@@ -7,16 +7,7 @@ const Test = props => {
     const testData = [
         { bgcolor: "#5b6ac7", completed: 10 }];
 
-
     const { history } = props;
-
-        useEffect(() => {
-
-            const fetchEvents = () => {
-                const res = axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=심리검사변수")
-                console.log(res)
-            }
-        })
 
 
 
@@ -139,7 +130,7 @@ const Test = props => {
                 </div>
 
                 <div>
-                    <button className="start" onClick={() => {history.push("/");}}> 다음으로</button>
+                    <button className="start" onClick={() => {history.push("/contents");}}> 다음으로</button>
                 </div>
 
             </div>

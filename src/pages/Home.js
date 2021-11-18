@@ -1,16 +1,3 @@
-// import React from "react";
-
-// const Home = props => {
-//     const { history } = props;
-//     return (
-//         <div>
-//             <button onClick={() => {history.push("/test");}}>검사시작</button>
-//         </div>
-//     );
-// };
-
-// export default Home;
-
 
 import React, { useState } from 'react';
 

@@ -11,13 +11,13 @@ const Guide = props => {
     const { history } = props;
 
 
-const handleClick = (e) => {
-    if (e.target.id == "A"){
-    history.push("/guide");
-    } else {
-    history.push("/other")
+    const handleClick = (e) => {
+        if (e.target.id == "A"){
+        history.push("/guide");
+        } else {
+        history.push("/other")
+        }
     }
-}
 
 
 
