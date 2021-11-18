@@ -10,6 +10,17 @@ const Guide = props => {
         { bgcolor: "#5b6ac7", completed: 10 }];
     const { history } = props;
 
+    
+const handleClick = (e) => {
+    if (e.target.id == "A"){
+    history.push("/guide");
+    } else {
+    history.push("/other")
+    }
+}
+
+
+
     return (
         <div>
 

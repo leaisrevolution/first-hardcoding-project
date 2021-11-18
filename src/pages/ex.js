@@ -1,21 +1,11 @@
-import ProgressBar from "./pages/ProgressBar.js";
-const testData = [{ bgcolor: "#6a1b9a", completed: 60 }];
 
-{testData.map((item, idx) => (
-    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-))}
 
-<div _ngcontent-fjx-c58="" class="horizontal-question-wrapper">
-<div _ngcontent-fjx-c58="" class="question-number">Q1</div>
-<!---->
-<div _ngcontent-fjx-c58="" class="question-title-wrapper">
-<div _ngcontent-fjx-c58="" class="mbti-question-title">
-길고 고단한 한 주 끝에 내가 기다리는 것은</div>
-</div>
-<div _ngcontent-fjx-c58="" class="radio-button-wrapper">
-<mat-radio-group _ngcontent-fjx-c58="" role="radiogroup" class="mat-radio-group"><div _ngcontent-fjx-c58="" class="horizontal-question left-question">
-<i _ngcontent-fjx-c58="" class="fas fa-arrow-left horizontal-question-arrow" aria-hidden="true"></i>
-<div _ngcontent-fjx-c58="">많은 친구들과의 모임 자리</div>
-</div>
-<!---->
-<mat-radio-button _ngcontent-fjx-c58="" class="mat-radio-button mat-accent" id="mat-radio-8"><label class="mat-radio-label" for="mat-radio-8-input"><span class="mat-radio-container"><span class="mat-radio-outer-circle"></span><span class="mat-radio-inner-circle"></span><input type="radio" class="mat-radio-input cdk-visually-hidden" id="mat-radio-8-input" tabindex="0" name="mat-radio-group-6" value="0"><span mat-ripple="" class="mat-ripple mat-radio-ripple mat-focus-indicator"><span class="mat-ripple-element mat-radio-persistent-ripple"></span></span></span><span class="mat-radio-label-content"><span style="display: none;">&nbsp;</span><!----></span></label></mat-radio-button><mat-radio-button _ngcontent-fjx-c58="" class="mat-radio-button mat-accent" id="mat-radio-9"><label class="mat-radio-label" for="mat-radio-9-input"><span class="mat-radio-container"><span class="mat-radio-outer-circle"></span><span class="mat-radio-inner-circle"></span><input type="radio" class="mat-radio-input cdk-visually-hidden" id="mat-radio-9-input" tabindex="0" name="mat-radio-group-6" value="1"><span mat-ripple="" class="mat-ripple mat-radio-ripple mat-focus-indicator"><span class="mat-ripple-element mat-radio-persistent-ripple"></span></span></span><span class="mat-radio-label-content"><span style="display: none;">&nbsp;</span><!----></span></label></mat-radio-button><mat-radio-button _ngcontent-fjx-c58="" class="mat-radio-button mat-accent" id="mat-radio-10"><label class="mat-radio-label" for="mat-radio-10-input"><span class="mat-radio-container"><span class="mat-radio-outer-circle"></span><span class="mat-radio-inner-circle"></span><input type="radio" class="mat-radio-input cdk-visually-hidden" id="mat-radio-10-input" tabindex="0" name="mat-radio-group-6" value="2"><span mat-ripple="" class="mat-ripple mat-radio-ripple mat-focus-indicator"><span class="mat-ripple-element mat-radio-persistent-ripple"></span></span></span><span class="mat-radio-label-content"><span style="display: none;">&nbsp;</span><!----></span></label></mat-radio-button><mat-radio-button _ngcontent-fjx-c58="" class="mat-radio-button mat-accent" id="mat-radio-11"><label class="mat-radio-label" for="mat-radio-11-input"><span class="mat-radio-container"><span class="mat-radio-outer-circle"></span><span class="mat-radio-inner-circle"></span><input type="radio" class="mat-radio-input cdk-visually-hidden" id="mat-radio-11-input" tabindex="0" name="mat-radio-group-6" value="3"><span mat-ripple="" class="mat-ripple mat-radio-ripple mat-focus-indicator"><span class="mat-ripple-element mat-radio-persistent-ripple"></span></span></span><span class="mat-radio-label-content"><span style="display: none;">&nbsp;</span><!----></span></label></mat-radio-button><mat-radio-button _ngcontent-fjx-c58="" class="mat-radio-button mat-accent" id="mat-radio-12"><label class="mat-radio-label" for="mat-radio-12-input"><span class="mat-radio-container"><span class="mat-radio-outer-circle"></span><span class="mat-radio-inner-circle"></span><input type="radio" class="mat-radio-input cdk-visually-hidden" id="mat-radio-12-input" tabindex="0" name="mat-radio-group-6" value="4"><span mat-ripple="" class="mat-ripple mat-radio-ripple mat-focus-indicator"><span class="mat-ripple-element mat-radio-persistent-ripple"></span></span></span><span class="mat-radio-label-content"><span style="display: none;">&nbsp;</span><!----></span></label></mat-radio-button><mat-radio-button _ngcontent-fjx-c58="" class="mat-radio-button mat-accent" id="mat-radio-13"><label class="mat-radio-label" for="mat-radio-13-input"><span class="mat-radio-container"><span class="mat-radio-outer-circle"></span><span class="mat-radio-inner-circle"></span><input type="radio" class="mat-radio-input cdk-visually-hidden" id="mat-radio-13-input" tabindex="0" name="mat-radio-group-6" value="5"><span mat-ripple="" class="mat-ripple mat-radio-ripple mat-focus-indicator"><span class="mat-ripple-element mat-radio-persistent-ripple"></span></span></span><span class="mat-radio-label-content"><span style="display: none;">&nbsp;</span><!----></span></label></mat-radio-button><!----><div _ngcontent-fjx-c58="" class="horizontal-question right-question"><div _ngcontent-fjx-c58="">영화나 게임 등을 즐기는 나만의 시간</div><i _ngcontent-fjx-c58="" class="fas fa-arrow-right horizontal-question-arrow" aria-hidden="true"></i></div><!----></mat-radio-group></div></div>
+const handleClick = (e) => {
+    if (e.target.id == "A"){
+    history.push("/guide");
+    } else {
+    history.push("/other")
+    }
+    }
+
+<button id="A" onClick={handleClick}/>
