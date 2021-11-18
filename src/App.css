@@ -62,12 +62,11 @@
 }
 
 
-
 .title {
   margin-top: 90px;
   color: rgb(87, 107, 205);
-
 }
+
 
 .content {
   color: rgb(118, 118, 118);
@@ -102,11 +101,14 @@
   border: solid 1px rgb(225, 224, 224);
 }
 
+Select {
+  height: "30"
+}
+
 .gender {
-  margin-top: 10px;
+  margin-top: 20px;
   width: 300px;
-  height: 45px;
-  border: solid 1px rgb(225, 224, 224);
+  height: 55px;
   border-radius: 5px;
 }
 
