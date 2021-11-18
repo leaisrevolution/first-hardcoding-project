@@ -10,7 +10,7 @@ const Guide = props => {
         { bgcolor: "#5b6ac7", completed: 10 }];
     const { history } = props;
 
-    
+
 const handleClick = (e) => {
     if (e.target.id == "A"){
     history.push("/guide");
@@ -37,7 +37,9 @@ const handleClick = (e) => {
                 </div>
 
                 <div>
-                    <h3 className = "title2">아래의 질문에 응답해주세요.</h3>
+                    <h3 className = "title2">아래의 예시 질문에 응답해주세요.
+                    </h3>
+                    {/* <p className = "content">예시 질문에 응답해주셔야 검사가 시작됩니다.</p> */}
                     <hr class="foo" />
 
                     <div className="bar">

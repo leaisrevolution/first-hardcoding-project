@@ -20,21 +20,9 @@ import React, { useState } from 'react';
 const Home = props => {
     const { history } = props;
 
-    const SignupContents = ({ history }) => {
-        const [checkedInputs, setCheckedInputs] = useState([]);
 
-        const changeHandler = (checked, id) => {
-            if (checked) {
-            setCheckedInputs([...checkedInputs, id]);
-            console.log(체크 반영 완료);
-            } else {
-            setCheckedInputs(checkedInputs.filter(el => el !== id));
-            console.log(체크 해제 반영 완료);
-            }
-        };
-
-        const isAllChecked = checkedInputs.length === 2;
-        const disabled = !isAllChecked;
+const onChange = (e) => {};
+const onReset = () => {};
 
 
     return (
@@ -100,7 +88,7 @@ const Home = props => {
                     onClick={() => {history.push("/guide");}}>
                         다음으로
                 </button>
-                <button id="A" onClick={handleClick}/>
+
 
             </div>
 
