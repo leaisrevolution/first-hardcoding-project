@@ -21,10 +21,7 @@ const Home = (props) => {
     const [age, setAge] = useState('')
     const [gender, setGender] = useState('')
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert(name + gender);
-    }
+
 
 
     return (
@@ -112,7 +109,7 @@ const Home = (props) => {
                         다음으로
                         </button>
                     </Link>
-                    ://안녕하세요
+                    :
                     <button
                         type = "submit"
                         className="start"

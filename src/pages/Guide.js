@@ -11,9 +11,7 @@ const Guide = props => {
     const { history } = props;
 
     const [answer, setAnswer] = useState('');
-    const ChangeHandler = (e) => {
-        e.preventDefalut();
-    }
+
 
 
     return (
