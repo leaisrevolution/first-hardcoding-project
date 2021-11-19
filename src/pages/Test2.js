@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ProgressBar from "./ProgressBar.js";
 import axios from "axios";
 
-const Test = (props) => {
+const Test2 = (props) => {
 
         const testData = [
             { bgcolor: "#5b6ac7", completed: 10 }];
@@ -157,7 +157,7 @@ const Test = (props) => {
                 </div>
 
                 <div>
-                    <button className="start" onClick={() => {history.push("/test2");}}> 다음으로</button>
+                    <button className="start" onClick={() => {history.push("/contents");}}> 다음으로</button>
                 </div>
 
             </div>
@@ -171,4 +171,4 @@ const Test = (props) => {
     );
 }
 
-export default Test;
+export default Test2;

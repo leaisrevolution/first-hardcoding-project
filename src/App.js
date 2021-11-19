@@ -4,7 +4,7 @@ import './App.css';
 import Home from "./pages/Home.js";
 import Guide from "./pages/Guide.js";
 import Test from "./pages/Test.js";
-import Contents from "./pages/Contents.js";
+import Test2 from "./pages/Test2.js";
 
 
 
@@ -19,7 +19,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/guide" component={Guide} />
                 <Route exact path="/test" component={Test} />
-                <Route exact path="/contents" component={Contents} />
+                <Route exact path="/test2" component={Test2} />
             </BrowserRouter>
         </div>
     );
