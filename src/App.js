@@ -8,9 +8,11 @@ import Contents from "./pages/Contents.js";
 
 
 
-function App() {
-    return (
 
+
+function App() {
+
+    return (
 
         <div className="App">
             <BrowserRouter>
@@ -19,13 +21,11 @@ function App() {
                 <Route exact path="/test" component={Test} />
                 <Route exact path="/contents" component={Contents} />
             </BrowserRouter>
-
         </div>
     );
 }
 
 
 
+
 export default App;
-
-

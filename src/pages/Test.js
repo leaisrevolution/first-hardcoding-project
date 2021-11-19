@@ -1,14 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useState,   useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProgressBar from "./ProgressBar.js";
 import axios from "axios";
 
-const Test = props => {
+const Test = (props) => {
 
     const testData = [
         { bgcolor: "#5b6ac7", completed: 10 }];
 
-    const { history } = props;
+        const history = useHistory();
+        const [question, setQuestion] = useState([])
+        useEffect(() => {
 
+            const fetchEvents = async () => {
+                const res = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6")
+                .then(res => res.data.RESULT)
+                .then(setQuestion)
+            }
+
+            fetchEvents()
+
+        }, [])
+
+        console.log(question)
 
 
     return (
@@ -23,7 +37,7 @@ const Test = props => {
 
             <div className="container">
                 <div className="main">
-                    <div className="title"> 질문에 응답해주세요. </div>
+                    <h1 className="title"> 질문에 응답해주세요. </h1>
                     <p className = "content"> 직업 관련된 두개의 가치 중에서 자기에게 더 중요한 가치에 표시하세요. <br/> 가치의 뜻을 잘 모르겠다면 문항 아래에 있는 가치의 설명을 확인해보세요.</p>
                 </div>
 

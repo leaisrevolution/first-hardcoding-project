@@ -1,5 +1,3 @@
-
-
 .App {
   text-align: left;
 }
@@ -79,6 +77,7 @@
 }
 
 .foo {
+  margin-top: 30px;
   color: rgb(118, 118, 118);
 }
 
@@ -95,17 +94,23 @@
 
 .inputName {
   margin-top: 10px;
-  width: 300px;
+  width: 580px;
   height: 45px;
   border-radius: 5px;
   border: solid 1px rgb(225, 224, 224);
 }
 
+.inputName:focus {
+  transition: all ease-in 80ms;
+  outline: none !important;
+  border: solid #2884f7 2px; /* #2884f7 */
+}
+
 
 .gender {
-  margin-top: 20px;
+  margin-top: 20spx;
   width: 300px;
-  height: 55px;
+  height: 60px;
   border-radius: 5px;
 }
 
@@ -135,6 +140,10 @@
   /* position: relative;
   left: 85%;
   max-width: 600px; */
+}
+
+#select1 {
+
 }
 
 
