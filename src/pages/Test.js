@@ -54,7 +54,7 @@ const Test = (props) => {
 
                 <div>
 
-                    <hr class="foo" />
+                    <hr className="foo" />
 
 
 
@@ -72,7 +72,7 @@ const Test = (props) => {
                             </h4>
 
                             <div className="qustionText">
-                                <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                             </div>
 
                             <div className="answerBtn">
@@ -87,7 +87,7 @@ const Test = (props) => {
                             </h4>
 
                             <div className="qustionText">
-                                <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                             </div>
 
                             <div className="answerBtn">
@@ -102,7 +102,7 @@ const Test = (props) => {
                             </h4>
 
                             <div className="qustionText">
-                                <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                             </div>
 
                             <div className="answerBtn">
@@ -117,7 +117,7 @@ const Test = (props) => {
                             </h4>
 
                             <div className="qustionText">
-                                <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                             </div>
 
                             <div className="answerBtn">
@@ -132,7 +132,7 @@ const Test = (props) => {
                             </h4>
 
                             <div className="qustionText">
-                                <h5 classNAme="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                             </div>
 
                             <div className="answerBtn">

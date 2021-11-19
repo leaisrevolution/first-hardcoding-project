@@ -68,7 +68,7 @@ const Test2 = (props) => {
 
                         <div>
                             <h4 className="qustionHeader">
-                                <span>Q1</span>
+                                <span>Q6</span>
                             </h4>
 
                             <div className="qustionText">
@@ -83,7 +83,7 @@ const Test2 = (props) => {
 
                         <div>
                             <h4 className="qustionHeader">
-                                <span>Q2</span>
+                                <span>Q7</span>
                             </h4>
 
                             <div className="qustionText">
@@ -98,7 +98,7 @@ const Test2 = (props) => {
 
                         <div>
                             <h4 className="qustionHeader">
-                                <span>Q3</span>
+                                <span>Q8</span>
                             </h4>
 
                             <div className="qustionText">
@@ -113,7 +113,7 @@ const Test2 = (props) => {
 
                         <div>
                             <h4 className="qustionHeader">
-                                <span>Q4</span>
+                                <span>Q9</span>
                             </h4>
 
                             <div className="qustionText">
@@ -128,7 +128,7 @@ const Test2 = (props) => {
 
                         <div>
                             <h4 className="qustionHeader">
-                                <span>Q5</span>
+                                <span>Q10</span>
                             </h4>
 
                             <div className="qustionText">

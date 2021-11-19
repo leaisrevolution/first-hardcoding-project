@@ -1,8 +1,6 @@
-
 import React, { useState, Component } from 'react';
 import Select from 'react-select';
 import { render } from '@testing-library/react';
-
 
 
 const options = [
@@ -19,24 +17,24 @@ const Home = (props) => {
         console.log(`Option selected:`, option);
 };
 
-const customStyles = {
-    input: (provided, state) => ({
-    ...provided,
-    borderBottom: '1px dotted pink',
-    color: state.isSelected ? 'red' : 'blue',
-    padding: 20,
-    }),
-    control: () => ({
-      // none of react-select's styles are passed to <Control />
-    width: 200,
-    }),
-    singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = 'opacity 300ms';
+// const customStyles = {
+//     input: (provided, state) => ({
+//     ...provided,
+//     borderBottom: '1px dotted pink',
+//     color: state.isSelected ? 'red' : 'blue',
+//     padding: 20,
+//     }),
+//     control: () => ({
+//       // none of react-select's styles are passed to <Control />
+//     width: 200,
+//     }),
+//     singleValue: (provided, state) => {
+//     const opacity = state.isDisabled ? 0.5 : 1;
+//     const transition = 'opacity 300ms';
 
-    return { ...provided, opacity, transition };
-    }
-}
+//     return { ...provided, opacity, transition };
+//     }
+// }
 
     // const dispatch = useDispatch();
     // const [name, setName] =useState('');
@@ -100,7 +98,8 @@ const customStyles = {
                     <hr class="foo" />
 
                 <div className = "Q">
-                    <h5> Q1.당신의 이름을 입력해주세요. </h5>
+                    <h4 className="qustionHeader"> Q1 </h4>
+                    <h5>당신의 이름을 입력해주세요. </h5>
                     <input
                         name="name"
                         className = "inputName"
@@ -110,7 +109,8 @@ const customStyles = {
                 </div>
 
                 <div className = "Q">
-                    <h5> Q2.당신의 나이를 입력해주세요. </h5>
+                    <h4 className="qustionHeader"> Q2 </h4>
+                    <h5 className="qustionText">당신의 나이를 입력해주세요. </h5>
                     <input
                         name ="age"
                         className = "inputName"
@@ -120,7 +120,8 @@ const customStyles = {
                 </div>
 
                 <div className = "Q">
-                    <h5> Q3.당신의 성별을 선택해주세요. </h5>
+                    <h4 className="qustionHeader"> Q3 </h4>
+                    <h5>당신의 성별을 선택해주세요. </h5>
                 </div>
 
                 {/* <select className = "gender">
@@ -129,11 +130,11 @@ const customStyles = {
                     <option value="여자">여자</option>
                 </select> */}
 
-                        <Select id = "select1"
+                        <Select
                             value={selectedOption}
                             onChange={handleChange}
                             options={options}
-                    />
+                        />
 
                 <div className="startbtn">
                     <button
@@ -155,7 +156,6 @@ const customStyles = {
 
     );
 };
-
 
 
 export default Home;
