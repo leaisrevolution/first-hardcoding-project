@@ -100,7 +100,7 @@ const Home = (props) => {
                 />
 
 
-                <div className="startbtn">{
+                <div className="startbtn"> {
                     (name.length && gender.length && age.length) ?
                     <Link to="/guide">
                         <button
