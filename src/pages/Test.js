@@ -60,11 +60,11 @@ const Test = (props) => {
 
                     <div className="questionSection">
 
-                    <div className="bar">
-                    {testData.map((item, idx) => (
-                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-                        ))}
-                    </div>
+                        <div className="bar">
+                        {testData.map((item, idx) => (
+                        <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+                            ))}
+                        </div>
 
                         <div>
                             <h4 className="qustionHeader">
