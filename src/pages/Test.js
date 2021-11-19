@@ -5,8 +5,8 @@ import axios from "axios";
 
 const Test = (props) => {
 
-    const testData = [
-        { bgcolor: "#5b6ac7", completed: 10 }];
+        const testData = [
+            { bgcolor: "#5b6ac7", completed: 10 }];
 
         const history = useHistory();
         const [question, setQuestion] = useState([])
@@ -23,6 +23,17 @@ const Test = (props) => {
         }, [])
 
         console.log(question)
+
+        // axios.post(resultURL, {
+        //     params: {
+        //         "apikey": "e772916f49d49980fd515f04c9ebc4ba",         "qestrnSeq": "6",
+        //         "trgetSe": "100209",
+        //         "name": "홍길동",
+        //         "gender": "100323",
+        //         "startDtm": "1637310324",
+        //         "answers": "B1=1 B2=3 B3=5 B4=7 B5=9 B6=11 B7=13 B8=15 B9=17 B10=19 B11=21 B12=23 B13=25 B14=27 B15=29 B16=31 B17=33 B18=35 B19=37 B20=39 B21=41 B22=43 B23=45 B24=47 B25=49 B26=51 B27=53"
+        //     }
+        // })
 
 
     return (
@@ -45,14 +56,15 @@ const Test = (props) => {
 
                     <hr class="foo" />
 
+
+
+                    <div className="questionSection">
+
                     <div className="bar">
                     {testData.map((item, idx) => (
                     <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
                         ))}
                     </div>
-
-
-                    <div className="questionSection">
 
                         <div>
                             <h4 className="qustionHeader">
