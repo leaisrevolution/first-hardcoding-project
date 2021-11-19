@@ -8,6 +8,10 @@ const options = [
     { value: "female", label: "Female" },
 ];
 
+
+// 이부분 영광님이 수정 도와주심.. 역시 영광님은 천재 갓영광
+// 그의 노고가 물거품이 되지 않도록 다시 코드 이해하고 넘어갑시다.. 또 물어보면 염치도 없지
+
 const Home = (props) => {
     const { history } = props;
     console.log(props)
