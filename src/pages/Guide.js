@@ -65,9 +65,40 @@ const Guide = props => {
                                     <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
                                 </div>
 
-                                <div className="answerBtn">
-                                    { answers.map ((radio, idx) => (
-                                        <Button
+
+
+                                <form onChane={ChangeHandler}>
+
+                                    <div>
+                                    <button className= "answerBtn"
+                                        type="radio"
+                                        name="answer"
+                                        value="1"
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > 능력발휘 </button>
+                                    </div>
+
+                                    <div>
+                                    <button className="answerBtn2"
+                                        type="radio"
+                                        name="answer"
+                                        value="2"
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > 자율성 </button>
+
+                                </div>
+                                </form>
+
+
+                                        {/* <Button
                                             key={idx}
                                             id={`radio-${idx}`}
                                             type="radio"
@@ -82,7 +113,7 @@ const Guide = props => {
                                             {radio.name}
                                         </Button>
 
-                                        <Button
+                                        <AnswerButton
                                             key={idx}
                                             id={`radio-${idx}`}
                                             type="radio"
@@ -94,12 +125,13 @@ const Guide = props => {
                                                     setAnswer(event.target.value);
                                             }
 
-                                        }>
-                                            {radio.name}
-                                        </Button>
-                                    ))}
+                                            }>
 
-                                </div>
+                                        </AnswerButton> */}
+
+
+                                    </div>
+
 
                             </div>
 
@@ -107,37 +139,38 @@ const Guide = props => {
 
                         </div>
 
-                    </div>
+                        <div Id="btn">
 
-                    <div Id="btn">
+                            <button
+                                className="back"
+                                onClick={() => {history.push("/");}}> 뒤로가기</button>
 
-                        <button
-                            className="back"
-                            onClick={() => {history.push("/");}}> 뒤로가기</button>
-
-                        { (answer === '1') || (answer === '2') ?
-                            <Link to="/test">
+                            { (answer === '1') || (answer === '2') ?
+                                <Link to="/test">
+                                    <button
+                                        type="submit"
+                                        className="start"
+                                        onClick={() => {history.push("/test");}}> 검사시작
+                                    </button>
+                                </Link>
+                                :
                                 <button
                                     type="submit"
                                     className="start"
-                                    onClick={() => {history.push("/test");}}> 검사시작
+                                    disabled>
+                                    검사시작
                                 </button>
-                            </Link>
-                            :
-                            <button
-                                type="submit"
-                                className="start"
-                                disabled>
-                                검사시작
-                            </button>
-                            }
+                                }
+                        </div>
+
                     </div>
+
 
                 </div>
 
             </div>
 
-    </div>
+
 
     );
 }

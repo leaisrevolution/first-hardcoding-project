@@ -259,6 +259,15 @@
   margin-bottom: 8px;
 }
 
+.answerBtn2{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 .questionSection {
   margin-top: 20px;
 }
