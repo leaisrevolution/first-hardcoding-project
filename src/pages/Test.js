@@ -9,7 +9,10 @@ const Test = (props) => {
             { bgcolor: "#5b6ac7", completed: 10 }];
 
         const history = useHistory();
-        const [question, setQuestion] = useState([])
+        const [question, setQuestion] = useState([]);
+        const [error, setError] = useState(null);
+
+
         useEffect(() => {
 
             const fetchEvents = async () => {
@@ -143,7 +146,7 @@ const Test = (props) => {
 
                     </div>
 
-                    <hr class="foo2" />
+                    <hr className="foo2" />
 
                 </div>
 
