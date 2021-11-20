@@ -12,6 +12,9 @@ const Guide = props => {
 
     const [answer, setAnswer] = useState('');
 
+    const ChangeHandler = (e) => {
+        e.preventDefalut();
+    }
 
 
     return (
