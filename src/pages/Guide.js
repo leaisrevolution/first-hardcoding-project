@@ -12,8 +12,8 @@ const Guide = props => {
 
     const [answer, setAnswer] = useState('');
     const answers = [
-        { name: 'Radio', value: '1' },
-        { name: 'Radio', value: '2' }
+        { name: '능력발휘', value: '1' },
+        { name: '자율성', value: '2' }
     ];
 
     const ChangeHandler = (e) => {
@@ -66,36 +66,38 @@ const Guide = props => {
                                 </div>
 
                                 <div className="answerBtn">
-                                    {answers.map (radio, inx) => (
-                                        <AnswerButton
+                                    { answers.map ((radio, idx) => (
+                                        <Button
                                             key={idx}
                                             id={`radio-${idx}`}
                                             type="radio"
                                             name="answer"
                                             value={radio.value}
+                                            checked={answer === radio.value}
                                             onChange={
                                                 (event) => {
                                                     setAnswer(event.target.value);
                                                 }
                                             }>
-                                            능력발휘
-                                        </AnswerButton>
+                                            {radio.name}
+                                        </Button>
 
-                                        <AnswerButton
+                                        <Button
                                             key={idx}
                                             id={`radio-${idx}`}
                                             type="radio"
                                             name="answer"
                                             value={radio.value}
+                                            checked={answer === radio.value}
                                             onChange={
                                                 (event) => {
                                                     setAnswer(event.target.value);
                                             }
 
                                         }>
-                                            자율성
-                                        </AnswerButton>
-                                    )}
+                                            {radio.name}
+                                        </Button>
+                                    ))}
 
                                 </div>
 
