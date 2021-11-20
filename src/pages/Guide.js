@@ -4,25 +4,41 @@ import ProgressBar from "./ProgressBar.js";
 import { Link } from 'react-router-dom';
 
 
+
+const dataList = [
+    { id: 1, name: "실력발휘", isToggle: false },
+    { id: 2, name: "자율성", isToggle: false },
+];
+
+const Button = ({ id, name, isToggle }) => {
+    const [toggle, setToggle] = useState(isToggle);
+    const color = toggle ? "#2884f7" : "#d2d2d2";
+
+    const onChangeColor = () => {
+        setToggle(!toggle);
+    };
+    return (
+        <button id={id} onClick={onChangeColor} style={{ backgroundColor: color }}>
+        {name}
+        </button>
+    );
+};
+
+
+
 const Guide = props => {
+
+    const [data, setData] = useState(dataList);
 
     const testData = [
         { bgcolor: "#2884f7", completed: 10 }];
     const { history } = props;
 
-    const [answer, setAnswer] = useState('');
-    const answers = [
-        { name: '능력발휘', value: '1' },
-        { name: '자율성', value: '2' }
-    ];
+    const [answer, setAnswer] = useState('1');
 
     const ChangeHandler = (e) => {
-        e.preventDefalut();
+        // e.preventDefalut();
     }
-
-    const HandleClick = () => {
-        alert('버튼 클릭');
-    };
 
 
     return (
@@ -66,72 +82,66 @@ const Guide = props => {
                                 </div>
 
 
-
-                                <form onChane={ChangeHandler}>
-
-                                    <div>
-                                    <button className= "answerBtn"
-                                        type="radio"
-                                        name="answer"
-                                        value="1"
-                                        onChange={
-                                            (event) => {
-                                                setAnswer(event.target.value);
-                                            }
-                                        }
-                                    > 능력발휘 </button>
+                                <form onChange={ChangeHandler}>
+                                    <div className="btnContainer">
+                                        {data.map((item) => (
+                                            <button className= "answerBtn"
+                                                    type ="radio"
+                                                    key={item.id}
+                                                    id={item.id}
+                                                    name={item.name}
+                                                    isToggle={item.isToggle}
+                                                    onChange={
+                                                        (event) => {
+                                                            setAnswer(event.target.value);
+                                                        }
+                                                    }
+                                            />
+                                        ))}
                                     </div>
 
-                                    <div>
-                                    <button className="answerBtn2"
-                                        type="radio"
-                                        name="answer"
-                                        value="2"
-                                        onChange={
-                                            (event) => {
-                                                setAnswer(event.target.value);
-                                            }
-                                        }
-                                    > 자율성 </button>
-
-                                </div>
-                                </form>
 
 
-                                        {/* <Button
-                                            key={idx}
-                                            id={`radio-${idx}`}
+
+
+                                    {/* <button className= "answerBtn"
                                             type="radio"
-                                            name="answer"
-                                            value={radio.value}
-                                            checked={answer === radio.value}
+                                            name="answer1"
+                                            value="1"
                                             onChange={
                                                 (event) => {
                                                     setAnswer(event.target.value);
                                                 }
-                                            }>
-                                            {radio.name}
-                                        </Button>
+                                            }
+                                        > 능력발휘 </button> */}
 
-                                        <AnswerButton
-                                            key={idx}
-                                            id={`radio-${idx}`}
+                                        {/* <button className= "answerBtn"
                                             type="radio"
-                                            name="answer"
-                                            value={radio.value}
-                                            checked={answer === radio.value}
+                                            name="answer1"
+                                            value="1"
                                             onChange={
                                                 (event) => {
                                                     setAnswer(event.target.value);
+                                                }
                                             }
+                                        > 능력발휘 </button> */}
 
-                                            }>
+                                        {/* <button className="answerBtn2"
+                                            type="radio"
+                                            name="answer2"
+                                            value="2"
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                        > 자율성 </button> */}
 
-                                        </AnswerButton> */}
+                                    {/* </div> */}
 
+                                </form>
 
-                                    </div>
-
+                            </div>
 
                             </div>
 
