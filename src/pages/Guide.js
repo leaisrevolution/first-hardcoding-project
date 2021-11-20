@@ -11,10 +11,18 @@ const Guide = props => {
     const { history } = props;
 
     const [answer, setAnswer] = useState('');
+    const answers = [
+        { name: 'Radio', value: '1' },
+        { name: 'Radio', value: '2' }
+    ];
 
     const ChangeHandler = (e) => {
         e.preventDefalut();
     }
+
+    const HandleClick = () => {
+        alert('버튼 클릭');
+    };
 
 
     return (
@@ -58,27 +66,37 @@ const Guide = props => {
                                 </div>
 
                                 <div className="answerBtn">
-                                    <button
-                                        name="answer"
-                                        value="1"
-                                        onChange={
-                                            (event) => {
-                                                setAnswer(event.target.value);
-                                            }
-                                        }>
+                                    {answers.map (radio, inx) => (
+                                        <AnswerButton
+                                            key={idx}
+                                            id={`radio-${idx}`}
+                                            type="radio"
+                                            name="answer"
+                                            value={radio.value}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }>
                                             능력발휘
-                                    </button>
+                                        </AnswerButton>
 
-                                    <button
-                                        name="answer"
-                                        value="2"
-                                        onChange={
-                                            (event) => {
-                                                setAnswer(event.target.value);
+                                        <AnswerButton
+                                            key={idx}
+                                            id={`radio-${idx}`}
+                                            type="radio"
+                                            name="answer"
+                                            value={radio.value}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
                                             }
+
                                         }>
                                             자율성
-                                    </button>
+                                        </AnswerButton>
+                                    )}
+
                                 </div>
 
                             </div>
