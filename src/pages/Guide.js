@@ -1,52 +1,87 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useHistory } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux' ;
 import ProgressBar from "./ProgressBar.js";
 import { Link } from 'react-router-dom';
+import axios from "axios";
+// import { Provider } from 'react-redux';
+// import { ProgressBar } from 'react-bootstrap';
 
 
+function GuideSample() {
 
-const dataList = [
-    { id: 1, name: "실력발휘", isToggle: false },
-    { id: 2, name: "자율성", isToggle: false },
-];
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const questions = useSelector(selector.questions);
 
-const Button = ({ id, name, isToggle }) => {
-    const [toggle, setToggle] = useState(isToggle);
-    const color = toggle ? "#2884f7" : "#d2d2d2";
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [select, setSelect] = useState(0);
+    const [state, setState] = useState('');
+    const [questionFirst, setQuestionFirst] = useState([]);
 
-    const onChangeColor = () => {
-        setToggle(!toggle);
+
+    async function fetchEvents() {
+        try {
+            setLoading(ture);
+            const responce = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6");
+            console.log(response.data['RESULT']);
+            dispatch(actions.setQustion(response.data['RESULT']));
+            dispatch(actions.setTotalNumber(response.data['RESULT'].length));
+            setLoading(false);
+        } catch (e) {
+            setError(e);
+        }
     };
-    return (
-        <button id={id} onClick={onChangeColor} style={{ backgroundColor: color }}>
-        {name}
-        </button>
-    );
-};
 
+    useEffect(() => {
+        fetchEvents();
+    }, [])
+
+    useEffect(() => {
+        if(questions){
+            setQuestionFirst(questions.slice(0,1));
+        }
+    }, [ questions ]);
+
+    const handleClickBtn = useCallback((btnName) => {setSelect(btnName)}, [select])
+
+    // const selectButton = ({ id, isToggle }) => {
+
+    //     const [toggle, setToggle] = useState(isToggle);
+    //     const color = toggle ? "#2884f7" : "#d2d2d2";
+
+    //     const onChangeColor = () => {
+    //         setToggle(!toggle);
+    //     };
+    //     return (
+    //         <button id={id}
+    //                 onClick={onChangeColor}
+    //                 style={{ backgroundColor: color }}>
+    //         </button>
+    //     );
+    // };
+}
 
 
 const Guide = props => {
 
-    const [data, setData] = useState(dataList);
+    // const [data, setData] = useState(dataList);
 
     const testData = [
         { bgcolor: "#2884f7", completed: 10 }];
     const { history } = props;
 
-    const [answer, setAnswer] = useState('1');
-
     const ChangeHandler = (e) => {
-        // e.preventDefalut();
+        e.preventDefalut();
     }
 
 
     return (
-        <div>
+        <>
 
-            <div className="nav">
-                <div className="nav container"> /* elice */ front-end project</div>
-            </div>
+            <div className="nav"> /* elice */ front-end project </div>
 
             <div className="wrap">
 
@@ -67,37 +102,54 @@ const Guide = props => {
                             {testData.map((item, idx) => (
                             <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
                             ))}
+                            {/* <ProgressBar now={60} /> */}
                         </div>
 
-                        <div className="questionSection">
+                                <form className="questionSection" onChange={ChangeHandler}>
 
-                            <div>
+                                    <div className="questionHead">
 
-                                <h4 className="qustionHeader">
-                                    Q1
-                                </h4>
+                                        <h4 className="qustionNumber">
+                                            Q1
+                                        </h4>
 
-                                <div>
-                                    <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                                </div>
+                                        <div>
+                                            <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                        </div>
+
+                                    </div>
 
 
-                                <form onChange={ChangeHandler}>
-                                    <div className="btnContainer">
-                                        {data.map((item) => (
-                                            <button className= "answerBtn"
-                                                    type ="radio"
-                                                    key={item.id}
-                                                    id={item.id}
-                                                    name={item.name}
-                                                    isToggle={item.isToggle}
-                                                    onChange={
-                                                        (event) => {
-                                                            setAnswer(event.target.value);
-                                                        }
-                                                    }
-                                            />
-                                        ))}
+                                    <div className="questionBody">
+
+                                        {questionFirst?.map( item => {
+                                            return (
+                                                <>
+                                                    <div className="btnContainer">
+                                                        <button className= "answerBtn"
+                                                                type ="radio"
+                                                                id = "1"
+                                                                checked = {select === 1}
+                                                                onChange={
+                                                                    () => {
+                                                                        // setState(item.answer03);
+                                                                        handleClickBtn(1); }}
+                                                        />
+                                                        <button className= "answerBtn"
+                                                                type ="radio"
+                                                                id = "2"
+                                                                is
+                                                                checked = {select === 2}
+                                                                onChange={
+                                                                    () => {
+                                                                        // setState(item.answer04);
+                                                                        handleClickBtn(2); }}
+                                                        />
+                                                    </div>
+                                                </>
+                                            )
+                                        })}
+
                                     </div>
 
 
@@ -141,13 +193,11 @@ const Guide = props => {
 
                                 </form>
 
-                            </div>
-
-                            </div>
-
                             <hr className="foo2" />
 
                         </div>
+
+
 
                         <div Id="btn">
 
@@ -178,7 +228,7 @@ const Guide = props => {
 
                 </div>
 
-            </div>
+            </>
 
 
 
