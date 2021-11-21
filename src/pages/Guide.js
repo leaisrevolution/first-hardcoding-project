@@ -1,87 +1,36 @@
 
-import React, { useEffect, useState, useCallback } from "react";
-import { useHistory } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux' ;
+import React, { useState } from "react";
 import ProgressBar from "./ProgressBar.js";
 import { Link } from 'react-router-dom';
-import axios from "axios";
-// import { Provider } from 'react-redux';
-// import { ProgressBar } from 'react-bootstrap';
-
-
-function GuideSample() {
-
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const questions = useSelector(selector.questions);
-
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [select, setSelect] = useState(0);
-    const [state, setState] = useState('');
-    const [questionFirst, setQuestionFirst] = useState([]);
-
-
-    async function fetchEvents() {
-        try {
-            setLoading(ture);
-            const responce = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6");
-            console.log(response.data['RESULT']);
-            dispatch(actions.setQustion(response.data['RESULT']));
-            dispatch(actions.setTotalNumber(response.data['RESULT'].length));
-            setLoading(false);
-        } catch (e) {
-            setError(e);
-        }
-    };
-
-    useEffect(() => {
-        fetchEvents();
-    }, [])
-
-    useEffect(() => {
-        if(questions){
-            setQuestionFirst(questions.slice(0,1));
-        }
-    }, [ questions ]);
-
-    const handleClickBtn = useCallback((btnName) => {setSelect(btnName)}, [select])
-
-    // const selectButton = ({ id, isToggle }) => {
-
-    //     const [toggle, setToggle] = useState(isToggle);
-    //     const color = toggle ? "#2884f7" : "#d2d2d2";
-
-    //     const onChangeColor = () => {
-    //         setToggle(!toggle);
-    //     };
-    //     return (
-    //         <button id={id}
-    //                 onClick={onChangeColor}
-    //                 style={{ backgroundColor: color }}>
-    //         </button>
-    //     );
-    // };
-}
 
 
 const Guide = props => {
-
-    // const [data, setData] = useState(dataList);
 
     const testData = [
         { bgcolor: "#2884f7", completed: 10 }];
     const { history } = props;
 
+    const [answer, setAnswer] = useState('');
+    const answers = [
+        { name: '능력발휘', value: '1' },
+        { name: '자율성', value: '2' }
+    ];
+
     const ChangeHandler = (e) => {
         e.preventDefalut();
     }
 
+    const HandleClick = () => {
+        alert('버튼 클릭');
+    };
+
 
     return (
-        <>
+        <div>
 
-            <div className="nav"> /* elice */ front-end project </div>
+            <div className="nav">
+                <div className="nav container"> /* elice */ front-end project</div>
+            </div>
 
             <div className="wrap">
 
@@ -102,102 +51,59 @@ const Guide = props => {
                             {testData.map((item, idx) => (
                             <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
                             ))}
-                            {/* <ProgressBar now={60} /> */}
                         </div>
 
-                                <form className="questionSection" onChange={ChangeHandler}>
 
-                                    <div className="questionHead">
+                        <form className="questionSection" onChange={ChangeHandler}>
 
-                                        <h4 className="qustionNumber">
-                                            Q1
-                                        </h4>
+                            <div className="questionHead">
+
+                                <h4 className="qustionNumber">
+                                    Q1
+                                </h4>
+
+                                <div>
+                                    <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                </div>
+
+                            </div>
+
+                                <div className="questionBody">
+
+                                    <div className="btnContainer">
 
                                         <div>
-                                            <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="answer"
+                                            value="1"
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                        > 능력발휘 </button>
                                         </div>
 
-                                    </div>
-
-
-                                    <div className="questionBody">
-
-                                        {questionFirst?.map( item => {
-                                            return (
-                                                <>
-                                                    <div className="btnContainer">
-                                                        <button className= "answerBtn"
-                                                                type ="radio"
-                                                                id = "1"
-                                                                checked = {select === 1}
-                                                                onChange={
-                                                                    () => {
-                                                                        // setState(item.answer03);
-                                                                        handleClickBtn(1); }}
-                                                        />
-                                                        <button className= "answerBtn"
-                                                                type ="radio"
-                                                                id = "2"
-                                                                is
-                                                                checked = {select === 2}
-                                                                onChange={
-                                                                    () => {
-                                                                        // setState(item.answer04);
-                                                                        handleClickBtn(2); }}
-                                                        />
-                                                    </div>
-                                                </>
-                                            )
-                                        })}
-
-                                    </div>
-
-
-
-
-
-                                    {/* <button className= "answerBtn"
+                                        <div>
+                                        <button className="answerBtn2"
                                             type="radio"
-                                            name="answer1"
-                                            value="1"
-                                            onChange={
-                                                (event) => {
-                                                    setAnswer(event.target.value);
-                                                }
-                                            }
-                                        > 능력발휘 </button> */}
-
-                                        {/* <button className= "answerBtn"
-                                            type="radio"
-                                            name="answer1"
-                                            value="1"
-                                            onChange={
-                                                (event) => {
-                                                    setAnswer(event.target.value);
-                                                }
-                                            }
-                                        > 능력발휘 </button> */}
-
-                                        {/* <button className="answerBtn2"
-                                            type="radio"
-                                            name="answer2"
+                                            name="answer"
                                             value="2"
                                             onChange={
                                                 (event) => {
                                                     setAnswer(event.target.value);
                                                 }
                                             }
-                                        > 자율성 </button> */}
+                                        > 자율성 </button>
 
-                                    {/* </div> */}
+                                        </div>
 
-                                </form>
+                                        </div>
+                                    </div>
+                        </form>
 
-                            <hr className="foo2" />
-
-                        </div>
-
-
+                        <hr className="foo2" />
 
                         <div Id="btn">
 
@@ -226,10 +132,11 @@ const Guide = props => {
                     </div>
 
 
+                    </div>
+
                 </div>
 
-            </>
-
+            </div>
 
 
     );
