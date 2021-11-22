@@ -6,35 +6,35 @@ import MainNav from '../components/mainNav';
 
 
 
-export function SampleQuestion() {
-    const [isActive, setIsActive] = useState(false);
-    const [sampleQuestion, setSampleQuestion] = useState({
-        question: "",
-        answer01: "",
-        answer02: "",
-        answerScore01: "",
-        answerScore02: "",
-    });
+// export function SampleQuestion() {
+//     const [isActive, setIsActive] = useState(false);
+//     const [sampleQuestion, setSampleQuestion] = useState({
+//         question: "",
+//         answer01: "",
+//         answer02: "",
+//         answerScore01: "",
+//         answerScore02: "",
+//     });
 
-    const getQuestion = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6`
-    const getResult = `https://www.career.go.kr/inspct/openapi/test/report?apikey=b7776804e4c61de3cfb023471c48aa0a&qestrnSeq=6`
+//     const getQuestion = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6`
+//     const getResult = `https://www.career.go.kr/inspct/openapi/test/report?apikey=b7776804e4c61de3cfb023471c48aa0a&qestrnSeq=6`
 
 
-    const SampleQuestion = async () => {
-        const response = await axios.get(getQuestion);
-        const setRes = response.data.RESULT[0];
-        setSampleQuestion(current => {
-            const newQue = { ...current };
-            newQue.question = setRes.question;
-            newQue.answer01 = setRes.answer01;
-            newQue.answer02 = setRes.answer02;
-            newQue.answerScore01 = setRes.answerScore01;
-            newQue.answerScore02 = setRes.answerScore02;
-            return newQue;
-        });
-    };
+//     const SampleQuestion = async () => {
+//         const response = await axios.get(getQuestion);
+//         const setRes = response.data.RESULT[0];
+//         setSampleQuestion(current => {
+//             const newQue = { ...current };
+//             newQue.question = setRes.question;
+//             newQue.answer01 = setRes.answer01;
+//             newQue.answer02 = setRes.answer02;
+//             newQue.answerScore01 = setRes.answerScore01;
+//             newQue.answerScore02 = setRes.answerScore02;
+//             return newQue;
+//         });
+//     };
 
-};
+// };
 
 
 
