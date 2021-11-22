@@ -2,19 +2,19 @@
 import React, { useState } from "react";
 import ProgressBar from "./ProgressBar.js";
 import { Link } from 'react-router-dom';
+import MainNav from '../components/mainNav';
 
 
 const Guide = props => {
 
-    const testData = [
-        { bgcolor: "#2884f7", completed: 10 }];
+    // const testData = [
+    //     { bgcolor: "#2884f7", completed: 10 }];
     const { history } = props;
 
-    const [answer, setAnswer] = useState('');
-    const answers = [
-        { name: '능력발휘', value: '1' },
-        { name: '자율성', value: '2' }
-    ];
+    const [saveData, setSaveData] = useState([]);
+    const [answer, setAnswer] = useState(''); //선택지저장
+
+
 
     const ChangeHandler = (e) => {
         e.preventDefalut();
@@ -26,11 +26,10 @@ const Guide = props => {
 
 
     return (
+
         <div>
 
-            <div className="nav">
-                <div className="nav container"> /* elice */ front-end project</div>
-            </div>
+            <MainNav />
 
             <div className="wrap">
 
@@ -47,14 +46,15 @@ const Guide = props => {
                         {/* <p className = "content">예시 질문에 응답해주셔야 검사가 시작됩니다.</p> */}
                         <hr className="foo" />
 
-                        <div className="bar">
+                        {/* <div className="bar">
                             {testData.map((item, idx) => (
                             <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
                             ))}
-                        </div>
+                        </div> */}
 
 
-                        <form className="questionSection" onChange={ChangeHandler}>
+                        <form className="questionSection"
+                                onChange={ChangeHandler}>
 
                             <div className="questionHead">
 
@@ -82,6 +82,7 @@ const Guide = props => {
                                                     setAnswer(event.target.value);
                                                 }
                                             }
+                                            // onClick={}
                                         > 능력발휘 </button>
                                         </div>
 
@@ -105,6 +106,9 @@ const Guide = props => {
 
                         <hr className="foo2" />
 
+
+
+
                         <div Id="btn">
 
                             <button
@@ -120,13 +124,13 @@ const Guide = props => {
                                     </button>
                                 </Link>
                                 :
-                                <button
-                                    type="submit"
-                                    className="start"
-                                    disabled>
-                                    검사시작
-                                </button>
-                                }
+                                    <button
+                                        type="submit"
+                                        className="start"
+                                        disabled>
+                                        검사시작
+                                    </button>
+                            }
                         </div>
 
                     </div>

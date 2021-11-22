@@ -2,6 +2,8 @@ import React, { useState, Component,useEffect } from 'react';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import MainNav from '../components/mainNav';
+
 
 
 const options = [
@@ -29,10 +31,7 @@ const Home = (props) => {
 
     return (
         <div>
-            <div className="nav">
-                <div className="nav container"> /* elice */ front-end project</div>
-            </div>
-
+            <MainNav />
             <div className="wrap">
                 <div className="container">
                     <div className="main">
@@ -52,7 +51,7 @@ const Home = (props) => {
 
             <form onSubmit={ handleSubmit }>
                 <div className = "Q">
-                    <h4 className="qustionHeader"> Q1 </h4>
+                    <h4 className="qustionNumber"> Q1 </h4>
                     <h5>당신의 이름을 입력해주세요. </h5>
                     <input
                         id="name"
@@ -68,7 +67,7 @@ const Home = (props) => {
                 </div>
 
                 <div className = "Q">
-                    <h4 className="qustionHeader"> Q2 </h4>
+                    <h4 className="qustionNumber"> Q2 </h4>
                     <h5 className="qustionText">당신의 나이를 입력해주세요. </h5>
                     <input
                         name ="age"
@@ -78,26 +77,26 @@ const Home = (props) => {
                         onChange={
                             (event) => {
                                 setAge(event.target.value);
-                            }// 이거 처럼 setGender도 해주셔야해요.
+                            }
                         }
                     />
                 </div>
 
                 <div className = "Q">
-                    <h4 className="qustionHeader"> Q3 </h4>
+                    <h4 className="qustionNumber"> Q3 </h4>
                     <h5>당신의 성별을 선택해주세요. </h5>
+                    <Select classNambe="genderSelet"
+                        value={selectedOption}
+                        onChange={(option)=>{
+                            setSelectedOption(option)
+                            setGender(option.value)
+                            console.log(gender)
+                        }}
+                        options={options}
+                    />
                 </div>
 
 
-                <Select
-                    value={selectedOption}
-                    onChange={(option)=>{
-                        setSelectedOption(option)
-                        setGender(option.value)
-                        console.log(gender)
-                    }}
-                    options={options}
-                />
 
 
                 <div className="startbtn">{
