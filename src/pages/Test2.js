@@ -1,174 +1,425 @@
-import React, { useState,   useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import ProgressBar from "./ProgressBar.js";
-import axios from "axios";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import MainNav from '../components/mainNav';
 
-const Test2 = (props) => {
+export default function Test2(props){
+    const { history } = props;
+    const [answer, setAnswer] = useState({});
+    const [check,setCheck] = useState({
+        ans_1: "",
+        ans_2: "",
+        ans_3: "",
+        ans_4: "",
+        ans_5: ""
+    });
+    const handleChange = e => {
+        setCheck({
+            ...check,
+            [e.target.name] : e.target.value
+        })
+    }
+    const questionList = async() =>{
+            const res = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
+            setAnswer({
+                question: res.data.RESULT[0].question,
+                answer51: res.data.RESULT[5].answer01,
+                answer52: res.data.RESULT[5].answer02,
+                answer53: res.data.RESULT[5].answer03,
+                answer54: res.data.RESULT[5].answer04,
+                answer61: res.data.RESULT[6].answer01,
+                answer62: res.data.RESULT[6].answer02,
+                answer63: res.data.RESULT[6].answer03,
+                answer64: res.data.RESULT[6].answer04,
+                answer71: res.data.RESULT[7].answer01,
+                answer72: res.data.RESULT[7].answer02,
+                answer73: res.data.RESULT[7].answer03,
+                answer74: res.data.RESULT[7].answer04,
+                answer81: res.data.RESULT[8].answer01,
+                answer82: res.data.RESULT[8].answer02,
+                answer83: res.data.RESULT[8].answer03,
+                answer84: res.data.RESULT[8].answer04,
+                answer91: res.data.RESULT[9].answer01,
+                answer92: res.data.RESULT[9].answer02,
+                answer93: res.data.RESULT[9].answer03,
+                answer94: res.data.RESULT[9].answer04,
 
-        const testData = [
-            { bgcolor: "#5b6ac7", completed: 10 }];
+            })
+    }
+    useEffect(()=>{
+        questionList()
+    }, [] )
+        //렌더링 시에 한 번만 questionList를 실행한다.
 
-        const history = useHistory();
-        const [question, setQuestion] = useState([])
-        useEffect(() => {
-
-            const fetchEvents = async () => {
-                const res = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6")
-                .then(res => res.data.RESULT)
-                .then(setQuestion)
-            }
-
-            fetchEvents()
-
-        }, [])
-
-        console.log(question)
-
-        // axios.post(resultURL, {
-        //     params: {
-        //         "apikey": "e772916f49d49980fd515f04c9ebc4ba",         "qestrnSeq": "6",
-        //         "trgetSe": "100209",
-        //         "name": "홍길동",
-        //         "gender": "100323",
-        //         "startDtm": "1637310324",
-        //         "answers": "B1=1 B2=3 B3=5 B4=7 B5=9 B6=11 B7=13 B8=15 B9=17 B10=19 B11=21 B12=23 B13=25 B14=27 B15=29 B16=31 B17=33 B18=35 B19=37 B20=39 B21=41 B22=43 B23=45 B24=47 B25=49 B26=51 B27=53"
-        //     }
-        // })
-
-
-    return (
-
+    function handleSubmit(e){
+        e.preventDefault();
+        if(check.ans_1 ==='' || check.ans_2 ==='' || check.ans_3 ==='' || check.ans_4 ==='' || check.ans_5 ===''){
+            alert('모든 항목을 체크해주세요.')
+        }
+        else{
+            window.location.href ='/test3'
+        }
+    }
+    return(
         <div>
 
-        <div className="nav">
-            <div className="nav2 container"> /* elice */ front-end project</div>
+            <MainNav />
+                <div className="container">
+
+                    <div1>
+
+                        <div className="questionHead">
+
+                            <h4 className="qustionNumber">
+                                Q6.
+                            </h4>
+
+                            <h5 className="qustionText">{answer.question}</h5>
+
+                        </div>
+
+                        <div className="questionBody">
+                            <div className="btnContainer">
+
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_1"
+                                            value={answer.answer51}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                        >{answer.answer51}</button>
+                                    </div>
+
+                                    <div>
+                                    <button className="answerBtn2"
+                                        type="radio"
+                                        name="ans_1"
+                                        value={answer.answer52}
+                                        onClick={handleChange}
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > {answer.answer52} </button>
+
+                                    </div>
+                            </div>
+
+                            <div1>
+                                <p className="explanation">
+                                > {answer.answer51} : {answer.answer53}
+                                <br />
+                                > {answer.answer52} : {answer.answer54}  </p>
+                            </div1>
+
+                        </div>
+
+
+                    </div1>
+
+                    <hr className="foo3" />
+
+                    <div2>
+
+                        <div className="questionHead">
+
+                            <h4 className="qustionNumber">
+                                Q7.
+                            </h4>
+
+                            <h5 className="qustionText">{answer.question}</h5>
+
+                        </div>
+
+                        <div className="questionBody">
+                            <div className="btnContainer">
+
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_2"
+                                            value={answer.answer61}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                            // onClick={}
+                                        >{answer.answer61}</button>
+                                    </div>
+
+                                    <div>
+                                    <button className="answerBtn2"
+                                        type="radio"
+                                        name="ans_2"
+                                        value={answer.answer62}
+                                        onClick={handleChange}
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > {answer.answer62} </button>
+
+                                    </div>
+
+                            </div>
+
+                            <div2>
+                                    <p className="explanation">
+                                    > {answer.answer61} : {answer.answer63}
+                                    <br />
+                                    > {answer.answer62} : {answer.answer64}  </p>
+                            </div2>
+
+                        </div>
+
+                    </div2>
+
+                    <hr className="foo3" />
+
+                    <div3>
+
+                        <div className="questionHead">
+
+                            <h4 className="qustionNumber">
+                                Q8.
+                            </h4>
+
+                            <h5 className="qustionText">{answer.question}</h5>
+
+                        </div>
+
+                        <div className="questionBody">
+                            <div className="btnContainer">
+
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_3"
+                                            value={answer.answer71}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                            // onClick={}
+                                        >{answer.answer71}</button>
+                                    </div>
+
+                                    <div>
+                                    <button className="answerBtn2"
+                                        type="radio"
+                                        name="ans_3"
+                                        value={answer.answer72}
+                                        onClick={handleChange}
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > {answer.answer72} </button>
+
+                                    </div>
+
+                                <hr className="foo2" />
+                            </div>
+
+                            <div3>
+                                    <p className="explanation">
+                                    > {answer.answer71} : {answer.answer73}
+                                    <br />
+                                    > {answer.answer72} : {answer.answer74}  </p>
+                            </div3>
+
+                        </div>
+
+
+                    </div3>
+
+                    <hr className="foo3" />
+
+                    <div4>
+
+                        <div className="questionHead">
+
+                            <h4 className="qustionNumber">
+                                Q9.
+                            </h4>
+
+                            <h5 className="qustionText">{answer.question}</h5>
+
+                        </div>
+
+                        <div className="questionBody">
+                            <div className="btnContainer">
+
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_4"
+                                            value={answer.answer81}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                            // onClick={}
+                                        >{answer.answer81}</button>
+                                    </div>
+
+                                    <div>
+                                    <button className="answerBtn2"
+                                        type="radio"
+                                        name="ans_4"
+                                        value={answer.answer82}
+                                        onClick={handleChange}
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > {answer.answer82} </button>
+
+                                    </div>
+
+                                <hr className="foo2" />
+                            </div>
+
+                            <div3>
+                                    <p className="explanation">
+                                    > {answer.answer81} : {answer.answer83}
+                                    <br />
+                                    > {answer.answer82} : {answer.answer84}  </p>
+                            </div3>
+
+                        </div>
+
+
+                    </div4>
+
+                    <hr className="foo3" />
+
+                    <div5>
+
+                        <div className="questionHead">
+
+                            <h4 className="qustionNumber">
+                                Q10.
+                            </h4>
+
+                            <h5 className="qustionText">{answer.question}</h5>
+
+                        </div>
+
+                        <div className="questionBody">
+                            <div className="btnContainer">
+
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_5"
+                                            value={answer.answer91}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                            // onClick={}
+                                        >{answer.answer91}</button>
+                                    </div>
+
+                                    <div>
+                                    <button className="answerBtn2"
+                                        type="radio"
+                                        name="ans_5"
+                                        value={answer.answer92}
+                                        onClick={handleChange}
+                                        onChange={
+                                            (event) => {
+                                                setAnswer(event.target.value);
+                                            }
+                                        }
+                                    > {answer.answer92} </button>
+
+                                    </div>
+                                <hr className="foo2" />
+
+                            </div>
+
+                            <div3>
+                                    <p className="explanation">
+                                    > {answer.answer91} : {answer.answer93}
+                                    <br />
+                                    > {answer.answer92} : {answer.answer94}  </p>
+                            </div3>
+
+                        </div>
+                    </div5>
+
+                    <hr className="foo3" />
+
+                    {/* <Link to='/guide'><button type="submit">이전</button></Link>
+                    <button type="submit" onClick={handleSubmit}>다음</button> */}
+
+
+                <div Id="btn">
+
+                    <button
+                        type="submit"
+                        className="back"
+                        onClick={() => {history.push("/guide");}}> 뒤로가기</button>
+
+                    <button
+
+                        type="submit"
+                        className="start"
+                        onClick={() => {
+                            history.push("/test2")
+                            // if (valid)
+                            // history.push("/test1");
+                            // else
+                            // setError("예시 항목을 선택해주세요.")
+                        }}
+                        > 다음으로
+
+                    </button>
+
+                    {/* { (answer01 === '1') || (answer02 === '2') ?
+                        <Link to="/test1">
+                            <button
+                                type="submit"
+                                className="start"
+                                onClick={() =>
+                                {history.push("/test1");}}> 검사시작
+                            </button>
+                        </Link>
+                        :
+                            <button
+                                type="submit"
+                                className="start"
+                                disabled ="false">
+                                검사시작
+                            </button>
+                    } */}
+
+                </div>
+
+                </div>
+
+
+
+
         </div>
-
-        <div className="wrap">
-
-            <div className="container">
-                <div className="main">
-                    <h1 className="title"> 질문에 응답해주세요. </h1>
-                    <p className = "content"> 직업 관련된 두개의 가치 중에서 자기에게 더 중요한 가치에 표시하세요. <br/> 가치의 뜻을 잘 모르겠다면 문항 아래에 있는 가치의 설명을 확인해보세요.</p>
-                </div>
-
-                <div>
-
-                    <hr className="foo" />
-
-
-
-                    <div className="questionSection">
-
-                    <div className="bar">
-                    {testData.map((item, idx) => (
-                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-                        ))}
-                    </div>
-
-                        <div>
-                            <h4 className="qustionHeader">
-                                <span>Q6</span>
-                            </h4>
-
-                            <div className="qustionText">
-                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                            </div>
-
-                            <div className="answerBtn">
-                                <button>능력발휘</button>
-                                <button>자율성</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 className="qustionHeader">
-                                <span>Q7</span>
-                            </h4>
-
-                            <div className="qustionText">
-                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                            </div>
-
-                            <div className="answerBtn">
-                                <button>능력발휘</button>
-                                <button>자율성</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 className="qustionHeader">
-                                <span>Q8</span>
-                            </h4>
-
-                            <div className="qustionText">
-                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                            </div>
-
-                            <div className="answerBtn">
-                                <button>능력발휘</button>
-                                <button>자율성</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 className="qustionHeader">
-                                <span>Q9</span>
-                            </h4>
-
-                            <div className="qustionText">
-                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                            </div>
-
-                            <div className="answerBtn">
-                                <button>능력발휘</button>
-                                <button>자율성</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 className="qustionHeader">
-                                <span>Q10</span>
-                            </h4>
-
-                            <div className="qustionText">
-                                <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                            </div>
-
-                            <div className="answerBtn">
-                                <button>능력발휘</button>
-                                <button>자율성</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <hr className="foo2" />
-
-                </div>
-
-
-
-
-            <div Id="btn">
-
-                <div>
-                    <button className="back" onClick={() => {history.push("/guide");}}> 뒤로가기</button>
-                </div>
-
-                <div>
-                    <button className="start" onClick={() => {history.push("/contents");}}> 다음으로</button>
-                </div>
-
-            </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-    );
+    )
 }
-
-export default Test2;
