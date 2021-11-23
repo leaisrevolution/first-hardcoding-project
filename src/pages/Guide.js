@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ProgressBar from "./ProgressBar.js";
+// import ProgressBar from "./ProgressBar.js";
 import { Link, useHistory } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 import fetchQuestions from '../api/fetch'
-
-
-
+import axios from 'axios';
 
 
 const Guide = (props) => {
@@ -16,7 +14,7 @@ const Guide = (props) => {
     const [question, setQuestion] = useState([])
     const [answer01, setAnswer01] = useState([]);
     const [answer02, setAnswer02] = useState([]);
-    const [error, setError] = useState([]);
+    const [error, setError] = useState([null]);
 
     let valid = false
 
@@ -31,29 +29,43 @@ const Guide = (props) => {
     //     console.log(question)
 
 
-    useEffect(() => {
-        const ffetchEvents = async () => {
-            try {
-                const question = (await fetchQuestions())[0]
-                setQuestion(question.title);
-                setAnswer01(question.answer01);
-                setAnswer02(question.answer02);
-            } catch (e) {
-                setError(e);
-            }
-        };
-        fetchEvents();
-    }, []);
+    // 잠시보류
 
+    // useEffect(() => {
+    //     const fetchEvents = async () => {
+    //         try {
+    //             const question = (await fetchQuestions())[0]
+    //             setQuestion(question.title);
+    //             setAnswer01(question.answer01);
+    //             setAnswer02(question.answer02);
+    //         } catch (e) {
+    //             setError(e);
+    //         }
+    //     };
+    //     fetchEvents();
+    // }, []);
+
+
+        useEffect(() => {
+          const fetch = async () => {
+            try {
+              const response = await axios.get(`ttps://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6`);
+
+            } catch (e) {
+              setError(e);
+            }
+          };
+          fetch();
+        }, []);
 
 
     const ChangeHandler = (e) => {
         e.preventDefalut();
     }
 
-    const HandleClick = () => {
-        alert('버튼 클릭');
-    };
+    // const HandleClick = () => {
+    //     alert('버튼 클릭');
+    // };
 
 
     return (
@@ -88,17 +100,19 @@ const Guide = (props) => {
                             <form className="questionSection"
                                     onChange={ChangeHandler}>
 
-                                <div className="questionHead">
+                                <div>
 
-                                    <h4 className="qustionNumber">
-                                        Q1
-                                    </h4>
+                                    <div className="questionHead">
 
-                                    <div>
-                                        <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                        <h4 className="qustionNumber">
+                                            Q1
+                                        </h4>
+
+                                        {/* <div> */}
+                                            <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
+                                        {/* </div> */}
+
                                     </div>
-
-                                </div>
 
                                     <div className="questionBody">
 
@@ -111,7 +125,7 @@ const Guide = (props) => {
                                                 value="1"
                                                 onChange={
                                                     (event) => {
-                                                        setAnswer(event.target.value);
+                                                        setAnswer01(event.target.value);
                                                     }
                                                 }
                                                 // onClick={}
@@ -125,7 +139,7 @@ const Guide = (props) => {
                                                 value="2"
                                                 onChange={
                                                     (event) => {
-                                                        setAnswer(event.target.value);
+                                                        setAnswer02(event.target.value);
                                                     }
                                                 }
                                             > 자율성 </button>
@@ -133,10 +147,13 @@ const Guide = (props) => {
                                             </div>
 
                                             </div>
-                                        </div>
-                            </form>
+                                    </div>
 
-                            <hr className="foo2" />
+                                    <hr className="foo2" />
+
+                                </div>
+
+                            </form>
 
                         </div>
 
@@ -147,26 +164,43 @@ const Guide = (props) => {
                         <div Id="btn">
 
                             <button
+                                type="submit"
                                 className="back"
                                 onClick={() => {history.push("/");}}> 뒤로가기</button>
 
-                            { (answer === '1') || (answer === '2') ?
-                                <Link to="/test">
-                                    <button
+                            <button
 
+                                type="submit"
+                                className="start"
+                                onClick={() => {
+                                    history.push("/test1")
+                                    // if (valid)
+                                    // history.push("/test1");
+                                    // else
+                                    // setError("예시 항목을 선택해주세요.")
+                                }}
+                                > 검사시작
+
+                            </button>
+
+                            {/* { (answer01 === '1') || (answer02 === '2') ?
+                                <Link to="/test1">
+                                    <button
                                         type="submit"
                                         className="start"
-                                        onClick={() => {history.push("/test");}}> 검사시작
+                                        onClick={() =>
+                                        {history.push("/test1");}}> 검사시작
                                     </button>
                                 </Link>
                                 :
                                     <button
                                         type="submit"
                                         className="start"
-                                        disabled>
+                                        disabled ="false">
                                         검사시작
                                     </button>
-                            }
+                            } */}
+
                         </div>
 
                     </div>
