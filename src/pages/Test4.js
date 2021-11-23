@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, useHistory } from 'react';
+import { Link, } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 
-export default function Test4(props){
+export default function Test1(props){
     const { history } = props;
-    const [answer, setAnswer] = useState({});
+    let Numbers = [...Array(50)].map((v, i) => i);
+    const [answer, setAnswer] = useState([]);
     const [check,setCheck] = useState({
-        ans_1 : "",
+        ans_1: "",
         ans_2: "",
         ans_3: "",
         ans_4: "",
@@ -19,37 +20,24 @@ export default function Test4(props){
             [e.target.name] : e.target.value
         })
     }
-    const questionList = async() =>{
-            const res = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
-            setAnswer({
-                question: res.data.RESULT[0].question,
-                answer151: res.data.RESULT[15].answer01,
-                answer152: res.data.RESULT[15].answer02,
-                answer153: res.data.RESULT[15].answer03,
-                answer154: res.data.RESULT[15].answer04,
-                answer161: res.data.RESULT[16].answer01,
-                answer162: res.data.RESULT[16].answer02,
-                answer163: res.data.RESULT[15].answer03,
-                answer164: res.data.RESULT[15].answer04,
-                answer171: res.data.RESULT[17].answer01,
-                answer172: res.data.RESULT[17].answer02,
-                answer173: res.data.RESULT[15].answer03,
-                answer174: res.data.RESULT[15].answer04,
-                answer181: res.data.RESULT[18].answer01,
-                answer182: res.data.RESULT[18].answer02,
-                answer183: res.data.RESULT[15].answer03,
-                answer184: res.data.RESULT[15].answer04,
-                answer191: res.data.RESULT[19].answer01,
-                answer192: res.data.RESULT[19].answer02,
-                answer193: res.data.RESULT[15].answer03,
-                answer194: res.data.RESULT[15].answer04
 
-            })
+
+    async function asyncCall() {
+        try {
+            const response = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
+            const res = response.data.RESULT;
+            setAnswer(res.splice(16, 21)) //16~20
+
+            return res;
+        } catch(error) {
+            console.error(error);
+        }
     }
-    useEffect(()=>{
-        questionList()
-    }, [] )
-        //렌더링 시에 한 번만 questionList를 실행한다.
+
+    useEffect(() => asyncCall(), [])
+
+
+
 
     function handleSubmit(e){
         e.preventDefault();
@@ -57,370 +45,340 @@ export default function Test4(props){
             alert('모든 항목을 체크해주세요.')
         }
         else{
-            window.location.href ='/test2'
+            window.location.href ='/test5' // 이동할 다음 페이지
         }
     }
     return(
+
         <div>
 
-        <MainNav />
-            <div className="container">
+            <MainNav />
+                <div className="container">
 
-                <div1>
+                    <div1>
 
-                    <div className="questionHead">
+                        <div className="questionHead">
 
-                        <h4 className="qustionNumber">
-                            Q16.
-                        </h4>
+                            <h4 className="qustionNumber">
+                            Q{Numbers[16]}.
+                            </h4>
 
-                        <h5 className="qustionText">{answer.question}</h5>
+                            <h5 className="qustionText">{answer[0]?.question}</h5>
 
-                    </div>
+                        </div>
 
-                    <div className="questionBody">
-                        <div className="btnContainer">
+                        <div className="questionBody">
+                            <div className="btnContainer">
 
                                 <div>
-                                    <button className= "answerBtn"
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_1"
+                                            value={answer[0]?.answer01}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                        >{answer[0]?.answer01}</button>
+                                </div>
+
+                                <div>
+                                    <button className="answerBtn2"
                                         type="radio"
                                         name="ans_1"
-                                        value={answer.answer151}
+                                        value={answer[0]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
                                                 setAnswer(event.target.value);
                                             }
                                         }
-                                    >{answer.answer151}</button>
-                                </div>
-
-                                <div>
-                                <button className="answerBtn2"
-                                    type="radio"
-                                    name="ans_1"
-                                    value={answer.answer152}
-                                    onClick={handleChange}
-                                    onChange={
-                                        (event) => {
-                                            setAnswer(event.target.value);
-                                        }
-                                    }
-                                > {answer.answer152} </button>
+                                    > {answer[0]?.answer02} </button>
 
                                 </div>
+
+                            </div>
+
+                                <div1>
+                                <p className="explanation">
+                                > {answer[0]?.answer01} : {answer[0]?.answer03}
+                                <br />
+                                > {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
+                                </div1>
+
+                            </div>
+
+
+                    </div1>
+
+                    <hr className="foo3" />
+
+                    <div2>
+
+                        <div className="questionHead">
+
+                            <h4 className="qustionNumber">
+                            Q{Numbers[17]}.
+                            </h4>
+
+                            <h5 className="qustionText">{answer[0]?.question}</h5>
+
                         </div>
 
-                        <div1>
-                            <p className="explanation">
-                            > {answer.answer151} : {answer.answer153}
-                            <br />
-                            > {answer.answer152} : {answer.answer154}  </p>
-                        </div1>
+                        <div className="questionBody">
+                            <div className="btnContainer">
 
-                    </div>
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_2"
+                                            value={answer[1]?.answer01}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
 
+                                        >{answer[1]?.answer01}</button>
+                                    </div>
 
-                </div1>
-
-                <hr className="foo3" />
-
-                <div2>
-
-                    <div className="questionHead">
-
-                        <h4 className="qustionNumber">
-                            Q17.
-                        </h4>
-
-                        <h5 className="qustionText">{answer.question}</h5>
-
-                    </div>
-
-                    <div className="questionBody">
-                        <div className="btnContainer">
-
-                                <div>
-                                    <button className= "answerBtn"
+                                    <div>
+                                    <button className="answerBtn2"
                                         type="radio"
                                         name="ans_2"
-                                        value={answer.answer161}
+                                        value={answer[1]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
                                                 setAnswer(event.target.value);
                                             }
                                         }
-                                        // onClick={}
-                                    >{answer.answer161}</button>
-                                </div>
+                                    > {answer[1]?.answer02} </button>
 
-                                <div>
-                                <button className="answerBtn2"
-                                    type="radio"
-                                    name="ans_2"
-                                    value={answer.answer162}
-                                    onClick={handleChange}
-                                    onChange={
-                                        (event) => {
-                                            setAnswer(event.target.value);
-                                        }
-                                    }
-                                > {answer.answer162} </button>
+                                    </div>
 
-                                </div>
+                            </div>
+
+                            <div2>
+                                    <p className="explanation">
+                                    > {answer[1]?.answer01} : {answer[1]?.answer03}
+                                    <br />
+                                    > {answer[1]?.answer02} : {answer[1]?.answer04}  </p>
+                            </div2>
 
                         </div>
 
-                        <div2>
-                                <p className="explanation">
-                                > {answer.answer161} : {answer.answer163}
-                                <br />
-                                > {answer.answer162} : {answer.answer164}  </p>
-                        </div2>
+                    </div2>
 
-                    </div>
+                    <hr className="foo3" />
 
-                </div2>
+                    <div3>
 
-                <hr className="foo3" />
+                        <div className="questionHead">
 
-                <div3>
+                            <h4 className="qustionNumber">
+                            Q{Numbers[18]}.
+                            </h4>
 
-                    <div className="questionHead">
+                            <h5 className="qustionText">{answer[0]?.question}</h5>
 
-                        <h4 className="qustionNumber">
-                            Q18.
-                        </h4>
+                        </div>
 
-                        <h5 className="qustionText">{answer.question}</h5>
+                        <div className="questionBody">
+                            <div className="btnContainer">
 
-                    </div>
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_3"
+                                            value={answer[2]?.answer01}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                            // onClick={}
+                                        >{answer[2]?.answer01}</button>
+                                    </div>
 
-                    <div className="questionBody">
-                        <div className="btnContainer">
-
-                                <div>
-                                    <button className= "answerBtn"
+                                    <div>
+                                    <button className="answerBtn2"
                                         type="radio"
                                         name="ans_3"
-                                        value={answer.answer171}
+                                        value={answer[2]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
                                                 setAnswer(event.target.value);
                                             }
                                         }
-                                        // onClick={}
-                                    >{answer.answer171}</button>
-                                </div>
+                                    > {answer[2]?.answer02} </button>
 
-                                <div>
-                                <button className="answerBtn2"
-                                    type="radio"
-                                    name="ans_3"
-                                    value={answer.answer172}
-                                    onClick={handleChange}
-                                    onChange={
-                                        (event) => {
-                                            setAnswer(event.target.value);
-                                        }
-                                    }
-                                > {answer.answer172} </button>
+                                    </div>
 
-                                </div>
+                                <hr className="foo2" />
+                            </div>
 
-                            <hr className="foo2" />
+                            <div3>
+                                    <p className="explanation">
+                                    > {answer[2]?.answer01} : {answer[2]?.answer03}
+                                    <br />
+                                    > {answer[2]?.answer02} : {answer[2]?.answer04}  </p>
+                            </div3>
+
                         </div>
 
-                        <div3>
-                                <p className="explanation">
-                                > {answer.answer171} : {answer.answer173}
-                                <br />
-                                > {answer.answer172} : {answer.answer174}  </p>
-                        </div3>
 
-                    </div>
+                    </div3>
 
+                    <hr className="foo3" />
 
-                </div3>
+                    <div4>
 
-                <hr className="foo3" />
+                        <div className="questionHead">
 
-                <div4>
+                            <h4 className="qustionNumber">
+                            Q{Numbers[19]}.
+                            </h4>
 
-                    <div className="questionHead">
+                            <h5 className="qustionText">{answer[0]?.question}</h5>
 
-                        <h4 className="qustionNumber">
-                            Q19.
-                        </h4>
+                        </div>
 
-                        <h5 className="qustionText">{answer.question}</h5>
+                        <div className="questionBody">
+                            <div className="btnContainer">
 
-                    </div>
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_4"
+                                            value={answer[3]?.answer01}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                        >{answer[3]?.answer01}</button>
+                                    </div>
 
-                    <div className="questionBody">
-                        <div className="btnContainer">
-
-                                <div>
-                                    <button className= "answerBtn"
+                                    <div>
+                                    <button className="answerBtn2"
                                         type="radio"
                                         name="ans_4"
-                                        value={answer.answer181}
+                                        value={answer[3]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
                                                 setAnswer(event.target.value);
                                             }
                                         }
-                                        // onClick={}
-                                    >{answer.answer181}</button>
-                                </div>
+                                    > {answer[3]?.answer02} </button>
 
-                                <div>
-                                <button className="answerBtn2"
-                                    type="radio"
-                                    name="ans_4"
-                                    value={answer.answer182}
-                                    onClick={handleChange}
-                                    onChange={
-                                        (event) => {
-                                            setAnswer(event.target.value);
-                                        }
-                                    }
-                                > {answer.answer182} </button>
+                                    </div>
 
-                                </div>
+                                <hr className="foo2" />
+                            </div>
 
-                            <hr className="foo2" />
+                            <div3>
+                                    <p className="explanation">
+                                    > {answer[3]?.answer01} : {answer[3]?.answer03}
+                                    <br />
+                                    > {answer[3]?.answer02} : {answer[3]?.answer04}  </p>
+                            </div3>
+
                         </div>
 
-                        <div3>
-                                <p className="explanation">
-                                > {answer.answer181} : {answer.answer183}
-                                <br />
-                                > {answer.answer182} : {answer.answer184}  </p>
-                        </div3>
 
-                    </div>
+                    </div4>
 
+                    <hr className="foo3" />
 
-                </div4>
+                    <div5>
 
-                <hr className="foo3" />
+                        <div className="questionHead">
 
-                <div5>
+                            <h4 className="qustionNumber">
+                            Q{Numbers[20]}.
+                            </h4>
 
-                    <div className="questionHead">
+                            <h5 className="qustionText">{answer[0]?.question}</h5>
 
-                        <h4 className="qustionNumber">
-                            Q20.
-                        </h4>
+                        </div>
 
-                        <h5 className="qustionText">{answer.question}</h5>
+                        <div className="questionBody">
+                            <div className="btnContainer">
 
-                    </div>
+                                    <div>
+                                        <button className= "answerBtn"
+                                            type="radio"
+                                            name="ans_5"
+                                            value={answer[4]?.answer01}
+                                            onClick={handleChange}
+                                            onChange={
+                                                (event) => {
+                                                    setAnswer(event.target.value);
+                                                }
+                                            }
+                                            // onClick={}
+                                        >{answer[4]?.answer01}</button>
+                                    </div>
 
-                    <div className="questionBody">
-                        <div className="btnContainer">
-
-                                <div>
-                                    <button className= "answerBtn"
+                                    <div>
+                                    <button className="answerBtn2"
                                         type="radio"
                                         name="ans_5"
-                                        value={answer.answer191}
+                                        value={answer[4]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
                                                 setAnswer(event.target.value);
                                             }
                                         }
-                                        // onClick={}
-                                    >{answer.answer191}</button>
-                                </div>
+                                    > {answer[4]?.answer02} </button>
 
-                                <div>
-                                <button className="answerBtn2"
-                                    type="radio"
-                                    name="ans_5"
-                                    value={answer.answer192}
-                                    onClick={handleChange}
-                                    onChange={
-                                        (event) => {
-                                            setAnswer(event.target.value);
-                                        }
-                                    }
-                                > {answer.answer192} </button>
+                                    </div>
+                                <hr className="foo2" />
 
-                                </div>
-                            <hr className="foo2" />
+                            </div>
+
+                            <div3>
+                                    <p className="explanation">
+                                    > {answer[4]?.answer01} : {answer[4]?.answer03}
+                                    <br />
+                                    > {answer[4]?.answer02} : {answer[4]?.answer04}  </p>
+                            </div3>
 
                         </div>
+                    </div5>
 
-                        <div3>
-                                <p className="explanation">
-                                > {answer.answer191} : {answer.answer193}
-                                <br />
-                                > {answer.answer192} : {answer.answer194}  </p>
-                        </div3>
-
-                    </div>
-                </div5>
-
-                <hr className="foo3" />
-
-                {/* <Link to='/guide'><button type="submit">이전</button></Link>
-                <button type="submit" onClick={handleSubmit}>다음</button> */}
+                    <hr className="foo3" />
 
 
-            <div Id="btn">
+                <div Id="btn">
+                    <Link to='test3'>
+                        <button type="submit"
+                                className="back"
+                                >뒤로가기</button></Link>
 
-                <button
-                    type="submit"
-                    className="back"
-                    onClick={() => {history.push("/guide");}}> 뒤로가기</button>
-
-                <button
-
-                    type="submit"
-                    className="start"
-                    onClick={() => {
-                        history.push("/test2")
-                        // if (valid)
-                        // history.push("/test1");
-                        // else
-                        // setError("예시 항목을 선택해주세요.")
-                    }}
-                    > 다음으로
-
-                </button>
-
-                {/* { (answer01 === '1') || (answer02 === '2') ?
-                    <Link to="/test1">
-                        <button
-                            type="submit"
-                            className="start"
-                            onClick={() =>
-                            {history.push("/test1");}}> 검사시작
-                        </button>
-                    </Link>
-                    :
-                        <button
-                            type="submit"
-                            className="start"
-                            disabled ="false">
-                            검사시작
-                        </button>
-                } */}
-
-            </div>
-
-            </div>
+                        <button type="submit"
+                                className="start"
+                                onClick={handleSubmit}>
+                                    다음으로</button>
+                </div>
 
 
 
 
-    </div>
+                </div>
 
+
+
+
+        </div>
     )
-}
+ }
