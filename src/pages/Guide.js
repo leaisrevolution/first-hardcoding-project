@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "./ProgressBar.js";
 import { Link, useHistory } from 'react-router-dom';
 import MainNav from '../components/mainNav';
-import axios from "axios";
+import fetchQuestions from '../api/fetch'
 
 
 
@@ -12,24 +12,38 @@ const Guide = (props) => {
 
     // const testData = [
     //     { bgcolor: "#2884f7", completed: 10 }];
-
     const history = useHistory();
     const [question, setQuestion] = useState([])
-    const [answer, setAnswer] = useState(''); //선택지저장
+    const [answer01, setAnswer01] = useState([]);
+    const [answer02, setAnswer02] = useState([]);
+    const [error, setError] = useState([]);
+
+    let valid = false
+
+    // useEffect(() => {
+    //     const fetchEvents = async () => {
+    //         const res = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6")
+    //         .then(res => res.data.RESULT)
+    //         .then(setQuestion)
+    //     }
+    //     fetchEvents()
+    // }, [])
+    //     console.log(question)
+
 
     useEffect(() => {
-
-        const fetchEvents = async () => {
-            const res = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6")
-            .then(res => res.data.RESULT)
-            .then(setQuestion)
-        }
-
-        fetchEvents()
-
-    }, [])
-
-        console.log(question)
+        const ffetchEvents = async () => {
+            try {
+                const question = (await fetchQuestions())[0]
+                setQuestion(question.title);
+                setAnswer01(question.answer01);
+                setAnswer02(question.answer02);
+            } catch (e) {
+                setError(e);
+            }
+        };
+        fetchEvents();
+    }, []);
 
 
 
