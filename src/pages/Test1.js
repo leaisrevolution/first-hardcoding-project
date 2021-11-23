@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, useHistory } from 'react';
+import { Link, } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 
 export default function Test1(props){
     const { history } = props;
-    const [answer, setAnswer] = useState({});
+    const [result, setResult] = useState([]);
     const [check,setCheck] = useState({
-        ans_1 : "",
+        ans_1: "",
         ans_2: "",
         ans_3: "",
         ans_4: "",
@@ -19,36 +19,24 @@ export default function Test1(props){
             [e.target.name] : e.target.value
         })
     }
-    const questionList = async() =>{
-            const res = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
-            setAnswer({
-                question: res.data.RESULT[0].question,
-                answer01: res.data.RESULT[0].answer01,
-                answer02: res.data.RESULT[0].answer02,
-                answer03: res.data.RESULT[0].answer03,
-                answer04: res.data.RESULT[0].answer04,
-                answer11: res.data.RESULT[1].answer01,
-                answer12: res.data.RESULT[1].answer02,
-                answer13: res.data.RESULT[1].answer03,
-                answer14: res.data.RESULT[1].answer04,
-                answer21: res.data.RESULT[2].answer01,
-                answer22: res.data.RESULT[2].answer02,
-                answer23: res.data.RESULT[2].answer03,
-                answer24: res.data.RESULT[2].answer04,
-                answer31: res.data.RESULT[3].answer01,
-                answer32: res.data.RESULT[3].answer02,
-                answer33: res.data.RESULT[3].answer03,
-                answer34: res.data.RESULT[3].answer04,
-                answer41: res.data.RESULT[4].answer01,
-                answer42: res.data.RESULT[4].answer02,
-                answer43: res.data.RESULT[4].answer03,
-                answer44: res.data.RESULT[4].answer04,
-            })
+
+
+    async function asyncCall() {
+        try {
+            const response = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
+            const res = response.data.RESULT;
+            setResult(res.splice(0, 5)) //0~4
+
+            return res;
+        } catch(error) {
+            console.error(error);
+        }
     }
-    useEffect(()=>{
-        questionList()
-    }, [] )
-        //렌더링 시에 한 번만 questionList를 실행한다.
+
+    useEffect(() => asyncCall(), [])
+
+
+
 
     function handleSubmit(e){
         e.preventDefault();
@@ -74,51 +62,52 @@ export default function Test1(props){
                                 Q1.
                             </h4>
 
-                            <h5 className="qustionText">{answer.question}</h5>
+                            <h5 className="qustionText">{result[0]?.question}</h5>
 
                         </div>
 
                         <div className="questionBody">
                             <div className="btnContainer">
 
-                                    <div>
+                                <div>
                                         <button className= "answerBtn"
                                             type="radio"
                                             name="ans_1"
-                                            value={answer.answer01}
+                                            value={result[0]?.answer01}
                                             onClick={handleChange}
                                             onChange={
                                                 (event) => {
-                                                    setAnswer(event.target.value);
+                                                    setResult(event.target.value);
                                                 }
                                             }
-                                        >{answer.answer01}</button>
-                                    </div>
+                                        >{result[0]?.answer01}</button>
+                                </div>
 
-                                    <div>
+                                <div>
                                     <button className="answerBtn2"
                                         type="radio"
                                         name="ans_1"
-                                        value={answer.answer02}
+                                        value={result[0]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
-                                                setAnswer(event.target.value);
+                                                setResult(event.target.value);
                                             }
                                         }
-                                    > {answer.answer02} </button>
+                                    > {result[0]?.answer02} </button>
 
-                                    </div>
+                                </div>
+
                             </div>
 
-                            <div1>
+                                <div1>
                                 <p className="explanation">
-                                > {answer.answer01} : {answer.answer03}
+                                > {result[0]?.answer01} : {result[0]?.answer03}
                                 <br />
-                                > {answer.answer02} : {answer.answer04}  </p>
-                            </div1>
+                                > {result[0]?.answer02} : {result[0]?.answer04}  </p>
+                                </div1>
 
-                        </div>
+                            </div>
 
 
                     </div1>
@@ -133,7 +122,7 @@ export default function Test1(props){
                                 Q2.
                             </h4>
 
-                            <h5 className="qustionText">{answer.question}</h5>
+                            <h5 className="qustionText">{result[0]?.question}</h5>
 
                         </div>
 
@@ -144,29 +133,29 @@ export default function Test1(props){
                                         <button className= "answerBtn"
                                             type="radio"
                                             name="ans_2"
-                                            value={answer.answer11}
+                                            value={result[1]?.answer01}
                                             onClick={handleChange}
                                             onChange={
                                                 (event) => {
-                                                    setAnswer(event.target.value);
+                                                    setResult(event.target.value);
                                                 }
                                             }
-                                            // onClick={}
-                                        >{answer.answer11}</button>
+
+                                        >{result[1]?.answer01}</button>
                                     </div>
 
                                     <div>
                                     <button className="answerBtn2"
                                         type="radio"
                                         name="ans_2"
-                                        value={answer.answer12}
+                                        value={result[1]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
-                                                setAnswer(event.target.value);
+                                                setResult(event.target.value);
                                             }
                                         }
-                                    > {answer.answer12} </button>
+                                    > {result[1]?.answer02} </button>
 
                                     </div>
 
@@ -174,9 +163,9 @@ export default function Test1(props){
 
                             <div2>
                                     <p className="explanation">
-                                    > {answer.answer11} : {answer.answer13}
+                                    > {result[1]?.answer01} : {result[1]?.answer03}
                                     <br />
-                                    > {answer.answer12} : {answer.answer14}  </p>
+                                    > {result[1]?.answer02} : {result[1]?.answer04}  </p>
                             </div2>
 
                         </div>
@@ -193,7 +182,7 @@ export default function Test1(props){
                                 Q3.
                             </h4>
 
-                            <h5 className="qustionText">{answer.question}</h5>
+                            <h5 className="qustionText">{result[0]?.question}</h5>
 
                         </div>
 
@@ -204,29 +193,29 @@ export default function Test1(props){
                                         <button className= "answerBtn"
                                             type="radio"
                                             name="ans_3"
-                                            value={answer.answer21}
+                                            value={result[2]?.answer01}
                                             onClick={handleChange}
                                             onChange={
                                                 (event) => {
-                                                    setAnswer(event.target.value);
+                                                    setResult(event.target.value);
                                                 }
                                             }
                                             // onClick={}
-                                        >{answer.answer21}</button>
+                                        >{result[2]?.answer01}</button>
                                     </div>
 
                                     <div>
                                     <button className="answerBtn2"
                                         type="radio"
                                         name="ans_3"
-                                        value={answer.answer22}
+                                        value={result[2]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
-                                                setAnswer(event.target.value);
+                                                setResult(event.target.value);
                                             }
                                         }
-                                    > {answer.answer22} </button>
+                                    > {result[2]?.answer02} </button>
 
                                     </div>
 
@@ -235,9 +224,9 @@ export default function Test1(props){
 
                             <div3>
                                     <p className="explanation">
-                                    > {answer.answer21} : {answer.answer23}
+                                    > {result[2]?.answer01} : {result[2]?.answer03}
                                     <br />
-                                    > {answer.answer22} : {answer.answer24}  </p>
+                                    > {result[2]?.answer02} : {result[2]?.answer04}  </p>
                             </div3>
 
                         </div>
@@ -255,7 +244,7 @@ export default function Test1(props){
                                 Q4.
                             </h4>
 
-                            <h5 className="qustionText">{answer.question}</h5>
+                            <h5 className="qustionText">{result[0]?.question}</h5>
 
                         </div>
 
@@ -266,29 +255,28 @@ export default function Test1(props){
                                         <button className= "answerBtn"
                                             type="radio"
                                             name="ans_4"
-                                            value={answer.answer31}
+                                            value={result[3]?.answer01}
                                             onClick={handleChange}
                                             onChange={
                                                 (event) => {
-                                                    setAnswer(event.target.value);
+                                                    setResult(event.target.value);
                                                 }
                                             }
-                                            // onClick={}
-                                        >{answer.answer31}</button>
+                                        >{result[3]?.answer01}</button>
                                     </div>
 
                                     <div>
                                     <button className="answerBtn2"
                                         type="radio"
                                         name="ans_4"
-                                        value={answer.answer32}
+                                        value={result[3]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
-                                                setAnswer(event.target.value);
+                                                setResult(event.target.value);
                                             }
                                         }
-                                    > {answer.answer32} </button>
+                                    > {result[3]?.answer02} </button>
 
                                     </div>
 
@@ -297,9 +285,9 @@ export default function Test1(props){
 
                             <div3>
                                     <p className="explanation">
-                                    > {answer.answer31} : {answer.answer33}
+                                    > {result[3]?.answer01} : {result[3]?.answer03}
                                     <br />
-                                    > {answer.answer32} : {answer.answer34}  </p>
+                                    > {result[3]?.answer02} : {result[3]?.answer04}  </p>
                             </div3>
 
                         </div>
@@ -317,7 +305,7 @@ export default function Test1(props){
                                 Q5.
                             </h4>
 
-                            <h5 className="qustionText">{answer.question}</h5>
+                            <h5 className="qustionText">{result[0]?.question}</h5>
 
                         </div>
 
@@ -328,29 +316,29 @@ export default function Test1(props){
                                         <button className= "answerBtn"
                                             type="radio"
                                             name="ans_5"
-                                            value={answer.answer41}
+                                            value={result[4]?.answer01}
                                             onClick={handleChange}
                                             onChange={
                                                 (event) => {
-                                                    setAnswer(event.target.value);
+                                                    setResult(event.target.value);
                                                 }
                                             }
                                             // onClick={}
-                                        >{answer.answer41}</button>
+                                        >{result[4]?.answer01}</button>
                                     </div>
 
                                     <div>
                                     <button className="answerBtn2"
                                         type="radio"
                                         name="ans_5"
-                                        value={answer.answer42}
+                                        value={result[4]?.answer02}
                                         onClick={handleChange}
                                         onChange={
                                             (event) => {
-                                                setAnswer(event.target.value);
+                                                setResult(event.target.value);
                                             }
                                         }
-                                    > {answer.answer42} </button>
+                                    > {result[4]?.answer02} </button>
 
                                     </div>
                                 <hr className="foo2" />
@@ -359,9 +347,9 @@ export default function Test1(props){
 
                             <div3>
                                     <p className="explanation">
-                                    > {answer.answer41} : {answer.answer43}
+                                    > {result[4]?.answer01} : {result[4]?.answer03}
                                     <br />
-                                    > {answer.answer42} : {answer.answer44}  </p>
+                                    > {result[4]?.answer02} : {result[4]?.answer04}  </p>
                             </div3>
 
                         </div>
@@ -369,51 +357,21 @@ export default function Test1(props){
 
                     <hr className="foo3" />
 
-                    {/* <Link to='/guide'><button type="submit">이전</button></Link>
-                    <button type="submit" onClick={handleSubmit}>다음</button> */}
-
 
                 <div Id="btn">
+                    <Link to='/guide'>
+                        <button type="submit"
+                                className="back"
+                                >뒤로가기</button></Link>
 
-                    <button
-                        type="submit"
-                        className="back"
-                        onClick={() => {history.push("/guide");}}> 뒤로가기</button>
-
-                    <button
-
-                        type="submit"
-                        className="start"
-                        onClick={() => {
-                            history.push("/test2")
-                            // if (valid)
-                            // history.push("/test1");
-                            // else
-                            // setError("예시 항목을 선택해주세요.")
-                        }}
-                        > 다음으로
-
-                    </button>
-
-                    {/* { (answer01 === '1') || (answer02 === '2') ?
-                        <Link to="/test1">
-                            <button
-                                type="submit"
+                        <button type="submit"
                                 className="start"
-                                onClick={() =>
-                                {history.push("/test1");}}> 검사시작
-                            </button>
-                        </Link>
-                        :
-                            <button
-                                type="submit"
-                                className="start"
-                                disabled ="false">
-                                검사시작
-                            </button>
-                    } */}
-
+                                onClick={handleSubmit}>
+                                    다음으로</button>
                 </div>
+
+
+
 
                 </div>
 
@@ -421,6 +379,5 @@ export default function Test1(props){
 
 
         </div>
-
     )
-}
+ }
