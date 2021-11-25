@@ -1,4 +1,5 @@
-import React, { useState, Component,useEffect } from 'react';
+import React, { useState  } from 'react';
+import { useLocation } from "react-router";
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import MainNav from '../components/mainNav';
@@ -30,18 +31,42 @@ const contentList = [
 
 const Home = (props) => {
     const { history } = props;
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
+    // const [selectedOption, setSelectedOption] = useState(null);
+    const [userid, setUserid] = useState({
+        userName: "",
+        userAge: "",
+    });
+    const [userGender,setUserGender] = useState({})
+    const location = useLocation();
 
-    const handleSubmit = (e) => {
+    // const [name, setName] = useState('');
+    // const [age, setAge] = useState('');
+    // const [gender, setGender] = useState('');
+
+
+    const handleChange = e => {
+        setUserid({
+            ...userid,
+            [e.target.name]: e.target.value
+        });
+    };
+
+
+
+    function handleSubmit(e) {
         e.preventDefault();
-        alert();
+        console.log(userid);
+        console.log(userGender.value);
+        if (userid.userName === '' || userid.userAge === '' || !userGender.value)
+        {alert("제대로 입력한거 맞음요...?")}
+        else {
+            history.push({
+                pathname: '/guide',
+                state: userid
+            })
+            window.location.href = '/guide'
+        }
     }
-
-
-
 
 
     return (
@@ -70,15 +95,12 @@ const Home = (props) => {
                     <h4 className="qustionNumber"> Q1 </h4>
                     <h5 className="qustionText">{QuestionData[1]}</h5>
                     <input
-                        id="name"
+                        id="userName"
+                        name="userName"
                         className = "inputName"
                         type="text"
-                        value={name}
-                        onChange={
-                            (event) => {
-                                setName(event.target.value);
-                                console.log(event.target.value)
-                            }
+                        value={userid.userName}
+                        onChange={handleChange
                         }
                     />
                 </div>
@@ -87,15 +109,11 @@ const Home = (props) => {
                     <h4 className="qustionNumber"> Q2 </h4>
                     <h5 className="qustionText">{QuestionData[2]}</h5>
                     <input
-                        name ="age"
+                        name ="userAge"
                         className = "inputName"
                         type="text"
-                        value={age}
-                        onChange={
-                            (event) => {
-                                setAge(event.target.value);
-                                console.log(event.target.value)
-                            }
+                        value={userid.userAge}
+                        onChange={handleChange
                         }
                     />
                 </div>
@@ -105,42 +123,25 @@ const Home = (props) => {
                     <h5 className="qustionText">{QuestionData[3]}</h5>
                     <Select
                         className="select"
-                        value={selectedOption}
-                        onChange={(option)=>{
-                            setSelectedOption(option)
-                            setGender(option.value)
-                            console.log(gender) //이슈부분
-                        }}
+                        name="userGender"
+                        onChange={(e)=>setUserGender(e)}
                         options={options} //margin-top을 주고싶은데 먹히지 않아요..
                     />
 
                 </div>
 
 
-                <div className="startbtn">{
-                    (name.length && gender.length && age.length) ?
+                <div className="startbtn">
 
-                    <Link to="/guide">
 
                         <button
-                            type="submit"
-                            className="clickedstart"
-                            onClick={ (event) => {
-                                    history.push("/guide");
-                                }}>
-
-                        다음으로
+                            type = "submit"
+                            className="start"
+                            onClick={handleSubmit}
+                            >
+                            다음으로
                         </button>
 
-                    </Link>
-                    :
-                    <button
-                        type = "submit"
-                        className="start"
-                        disabled>
-                        다음으로
-                    </button>
-                    }
                 </div>
 
             </form>
