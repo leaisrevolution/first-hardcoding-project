@@ -2,73 +2,59 @@ import React, { useState, useEffect } from "react";
 // import ProgressBar from "./ProgressBar.js";
 import { Link, useHistory } from 'react-router-dom';
 import MainNav from '../components/mainNav';
-import fetchQuestions from '../api/fetch'
 import axios from 'axios';
+import Foo from '../components/foo';
+
 
 
 const Guide = (props) => {
 
-    // const testData = [
-    //     { bgcolor: "#2884f7", completed: 10 }];
     const history = useHistory();
-    const [question, setQuestion] = useState([])
-    const [answer01, setAnswer01] = useState([]);
-    const [answer02, setAnswer02] = useState([]);
-    const [error, setError] = useState([null]);
 
-    let valid = false
-
-    // useEffect(() => {
-    //     const fetchEvents = async () => {
-    //         const res = await axios.get("https://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6")
-    //         .then(res => res.data.RESULT)
-    //         .then(setQuestion)
-    //     }
-    //     fetchEvents()
-    // }, [])
-    //     console.log(question)
+    // const ChangeHandler = (e) => {
+    //     e.preventDefalut();
+    // }
 
 
-    // 잠시보류
+    let Numbers = [...Array(50)].map((v, i) => i);
 
-    // useEffect(() => {
-    //     const fetchEvents = async () => {
-    //         try {
-    //             const question = (await fetchQuestions())[0]
-    //             setQuestion(question.title);
-    //             setAnswer01(question.answer01);
-    //             setAnswer02(question.answer02);
-    //         } catch (e) {
-    //             setError(e);
-    //         }
-    //     };
-    //     fetchEvents();
-    // }, []);
+    const [answer, setAnswer] = useState([]);
+    console.log(answer);
+    const [answerlist, setAnswerList] = useState([]);
 
 
-        useEffect(() => {
-          const fetch = async () => {
-            try {
-              const response = await axios.get(`ttps://www.career.go.kr/inspct/openapi/test/questions?apikey=b7776804e4c61de3cfb023471c48aa0a&q=6`);
-
-            } catch (e) {
-              setError(e);
-            }
-          };
-          fetch();
-        }, []);
 
 
-    const ChangeHandler = (e) => {
-        e.preventDefalut();
+
+    async function asyncCall() {
+        try {
+            const response = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
+            const res = response.data.RESULT;
+            setAnswer(res.splice(0)) //페이지
+
+            return res;
+        } catch(error) {
+            console.error(error);
+        }
     }
 
-    // const HandleClick = () => {
-    //     alert('버튼 클릭');
-    // };
+    useEffect(() => asyncCall(), [])
+
+
+    const contentList = [
+        '검사는 이렇게 진행됩니다.',
+        '직업 관련된 두개의 가치 중에서 자기에게 더 중요한 가치에 표시하세요.',
+        '가치의 뜻을 잘 모르겠다면 문항 아래에 있는 가치의 설명을 확인해보세요.',
+        '아래의 예시 질문에 응답해주세요.',
+        '예시 질문에 응답해주셔야 검사가 시작됩니다.',
+    ]
+
+
 
 
     return (
+
+        // div 협곡에 오신걸 환영합니다.. 이건 div협곡 맛보기
 
         <div>
 
@@ -78,130 +64,124 @@ const Guide = (props) => {
 
                 <div className="container">
 
+
                     <div className="main">
-                        <h1 className = "title"> 검사는 이렇게 진행됩니다. </h1>
-                        <p className = "content"> 직업 관련된 두개의 가치 중에서 자기에게 더 중요한 가치에 표시하세요. <br/> 가치의 뜻을 잘 모르겠다면 문항 아래에 있는 가치의 설명을 확인해보세요.</p>
+                        <h1 className = "title"> {contentList[0]} </h1>
+                        <p className = "content"> {contentList[1]} <br/>{contentList[2]}</p>
                     </div>
 
                     <div>
-                        <h3 className = "title2">아래의 예시 질문에 응답해주세요.
-                        </h3>
-                        <p className = "content">예시 질문에 응답해주셔야 검사가 시작됩니다.</p>
-                        <hr className="foo" />
+                        <h3 className = "title2">{contentList[3]}</h3>
+                        <p className = "content">{contentList[4]}</p>
 
-                        {/* <div className="bar">
-                            {testData.map((item, idx) => (
-                            <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-                            ))}
-                        </div> */}
+                        <Foo />
 
-                        <div>
+                            <div>
 
-                            <form className="questionSection"
-                                    onChange={ChangeHandler}>
+                                <form className="questionSection">
 
-                                <div>
+                                    <div>
 
-                                    <div className="questionHead">
+                                        <div className="questionHead">
 
-                                        <h4 className="qustionNumber">
-                                            Q1
-                                        </h4>
+                                            <h4 className="qustionNumber">
+                                            Q{Numbers[1]}.
+                                            </h4>
 
-                                        {/* <div> */}
-                                            <h5 className="qustionText">두개의 가치 중에 자신에게 더 중요한 가치를 선택해주세요. </h5>
-                                        {/* </div> */}
+                                            <h5 className="qustionText">{answer[0]?.question}</h5>
 
-                                    </div>
+                                        </div>
 
-                                    <div className="questionBody">
+                                        <div className="questionBody">
 
-                                        <div className="btnContainer">
+                                            <div className="btnContainer">
 
                                             <div>
-                                            <button className= "answerBtn"
-                                                type="radio"
-                                                name="answer"
-                                                value="1"
-                                                onChange={
-                                                    (event) => {
-                                                        setAnswer01(event.target.value);
-                                                    }
-                                                }
-                                                // onClick={}
-                                            > 능력발휘 </button>
+                                                <button className=
+                                                                {answerlist == answer[0]?.answer01
+                                                                ?
+                                                                "clickedBtn" : "answerBtn"}
+                                                    name="ans_1"
+                                                    value={answer[0]?.answer01}
+                                                    onClick={(event) => {
+                                                        setAnswerList(event.target.value);
+
+                                                    }}
+                                                >{answer[0]?.answer01}</button>
                                             </div>
 
                                             <div>
-                                            <button className="answerBtn2"
-                                                type="radio"
-                                                name="answer"
-                                                value="2"
-                                                onChange={
-                                                    (event) => {
-                                                        setAnswer02(event.target.value);
-                                                    }
-                                                }
-                                            > 자율성 </button>
-
+                                                <button className=
+                                                                {answerlist == answer[0]?.answer02
+                                                                ?
+                                                                "clickedBtn" : "answerBtn"}
+                                                    name="ans_1"
+                                                    value={answer[0]?.answer02}
+                                                    onClick={(event) => {
+                                                        setAnswerList(event.target.value);
+                                                        console.log(event.target.value);
+                                                    }}
+                                                >{answer[0]?.answer02}</button>
                                             </div>
 
-                                            </div>
+                                                </div>
+
+                                                <div1>
+                                                    <p className="explanation">
+                                                    > {answer[0]?.answer01} : {answer[0]?.answer03}
+                                                    <br />
+                                                    > {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
+                                                    </div1>
+                                                </div>
+
+                                        <Foo />
+
                                     </div>
 
-                                    <hr className="foo2" />
+                                </form>
 
-                                </div>
+                            </div>
 
-                            </form>
+                            {/* <div Id="btn"> 말 안듣는 코드... 아래에 새로 구현해봄
 
-                        </div>
+                                <button
+                                    type="submit"
+                                    className="back"
+                                    onClick={() => {history.push("/");}}> 뒤로가기</button>
+
+                                {
+                                    (answerlist === answer[0]?.answer01) || (answerlist === answer[0]?.answer02) ?
+                                    <Link to="/test1">
+                                        <button
+                                            type="submit"
+                                            className="clickedstart"
+                                            onClick={handleSubmit}
+                                        > 검사시작
+                                        </button>
+                                    </Link>
+                                    :
+                                    <button
+                                        type="submit"
+                                        className="start"
+                                        disabled
+                                    > 검사시작
+                                    </button>
+                                }
+                            </div> */}
 
 
-
-
-
-                        <div Id="btn">
-
-                            <button
-                                type="submit"
+                <div Id="btn">
+                    <Link to='/'>
+                        <button type="submit"
                                 className="back"
-                                onClick={() => {history.push("/");}}> 뒤로가기</button>
+                                >뒤로가기</button></Link>
 
-                            <button
 
-                                type="submit"
-                                className="start"
-                                onClick={() => {
-                                    history.push("/test1")
-                                    // if (valid)
-                                    // history.push("/test1");
-                                    // else
-                                    // setError("예시 항목을 선택해주세요.")
-                                }}
-                                > 검사시작
-
-                            </button>
-
-                            {/* { (answer01 === '1') || (answer02 === '2') ?
-                                <Link to="/test1">
-                                    <button
-                                        type="submit"
-                                        className="start"
-                                        onClick={() =>
-                                        {history.push("/test1");}}> 검사시작
-                                    </button>
-                                </Link>
-                                :
-                                    <button
-                                        type="submit"
-                                        className="start"
-                                        disabled ="false">
-                                        검사시작
-                                    </button>
-                            } */}
-
-                        </div>
+                    <Link to='/test1'>
+                        <button type="submit"
+                                className="start">
+                                    다음으로</button> </Link>
+                </div>
 
                     </div>
 
@@ -218,3 +198,4 @@ const Guide = (props) => {
 
 
 export default Guide;
+

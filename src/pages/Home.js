@@ -1,8 +1,12 @@
 import React, { useState, Component,useEffect } from 'react';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import MainNav from '../components/mainNav';
+import Foo from '../components/foo';
+
+
+//기능구현 실패하는 것:
+//시간남으면 해야 할 것 : div를 모조리 정리해버리기
 
 
 
@@ -11,17 +15,25 @@ const options = [
     { id: "female", value: "female", label: "Female" },
 ];
 
+const QuestionData = [
+    '당신에 대해서 알려주세요.',
+    '당신에 이름을 알려주세요.',
+    '당신의 나이를 입력해주세요.',
+    '당신의 성별을 선택해주세요.'
+];
 
-// 이부분 영광님이 수정 도와주심.. 역시 영광님은 천재 갓영광
-// 그의 노고가 물거품이 되지 않도록 다시 코드 이해하고 넘어갑시다..
-// 또 물어보면 염치도 없지
+const contentList = [
+    '직업 가치관 검사',
+    '당신의 직업 검사 진행을 통해',
+    '나와 맞는 직업과 직업 가치관, 적합도가 높은 직업을 탐색해봅시다.',
+]
 
 const Home = (props) => {
     const { history } = props;
     const [selectedOption, setSelectedOption] = useState(null);
-    const [name, setName] = useState('')
-    const [age, setAge] = useState('')
-    const [gender, setGender] = useState('')
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
+    const [gender, setGender] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,31 +41,34 @@ const Home = (props) => {
     }
 
 
+
+
+
     return (
         <div>
             <MainNav />
             <div className="wrap">
                 <div className="container">
+
+
                     <div className="main">
-                    <h1 className="title"> 직업 가치관 검사 </h1>
+                    <h1 className="title"> {contentList[0]} </h1>
                     <p className="content">
                         {" "}
-                        당신의 직업 검사 진행을 통해 <br />
-                        나와 맞는 직업과 직업 가치관, 적합도가 높은 직업을 탐색해봅시다.
+                        {contentList[1]} <br />
+                        {contentList[2]}
                     </p>
-                </div>
+                    </div>
 
                 <div>
-
-                    <h3 className = "title2">당신에 대해서 알려주세요.</h3>
-                    <hr className="foo" />
-
+                    <h3 className = "title2">{QuestionData[0]}</h3>
+                    <Foo />
                 </div>
 
             <form onSubmit={ handleSubmit }>
                 <div className = "Q">
                     <h4 className="qustionNumber"> Q1 </h4>
-                    <h5>당신의 이름을 입력해주세요. </h5>
+                    <h5 className="qustionText">{QuestionData[1]}</h5>
                     <input
                         id="name"
                         className = "inputName"
@@ -62,6 +77,7 @@ const Home = (props) => {
                         onChange={
                             (event) => {
                                 setName(event.target.value);
+                                console.log(event.target.value)
                             }
                         }
                     />
@@ -69,7 +85,7 @@ const Home = (props) => {
 
                 <div className = "Q">
                     <h4 className="qustionNumber"> Q2 </h4>
-                    <h5 className="qustionText">당신의 나이를 입력해주세요. </h5>
+                    <h5 className="qustionText">{QuestionData[2]}</h5>
                     <input
                         name ="age"
                         className = "inputName"
@@ -78,6 +94,7 @@ const Home = (props) => {
                         onChange={
                             (event) => {
                                 setAge(event.target.value);
+                                console.log(event.target.value)
                             }
                         }
                     />
@@ -85,34 +102,37 @@ const Home = (props) => {
 
                 <div className = "Q">
                     <h4 className="qustionNumber"> Q3 </h4>
-                    <h5>당신의 성별을 선택해주세요. </h5>
-                    <Select classNambe="genderSelet"
+                    <h5 className="qustionText">{QuestionData[3]}</h5>
+                    <Select
                         value={selectedOption}
                         onChange={(option)=>{
                             setSelectedOption(option)
                             setGender(option.value)
-                            console.log(gender)
+                            console.log(gender) //이슈부분
                         }}
-                        options={options}
+                        options={options} //margin-top을 주고싶은데 먹히지 않아요..
                     />
+
                 </div>
-
-
 
 
                 <div className="startbtn">{
                     (name.length && gender.length && age.length) ?
+
                     <Link to="/guide">
+
                         <button
                             type="submit"
-                            className="start"
+                            className="clickedstart"
                             onClick={ (event) => {
                                     history.push("/guide");
                                 }}>
+
                         다음으로
                         </button>
+
                     </Link>
-                    ://안녕하세요
+                    :
                     <button
                         type = "submit"
                         className="start"
