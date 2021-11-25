@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState, useHistory } from 'react';
-import { Link, } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from "react-router";
+import { Link } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 import Foo from '../components/foo';
+
 
 
 export default function Test1(props){
@@ -11,6 +13,7 @@ export default function Test1(props){
     const [answer, setAnswer] = useState([]);
     console.log(answer);
     const [answerlist, setAnswerList] = useState([]);
+    const location = useLocation();
     const [check,setCheck] = useState({
         ans_1: "",
         ans_2: "",
@@ -18,6 +21,7 @@ export default function Test1(props){
         ans_4: "",
         ans_5: ""
     });
+
     const handleChange = e => {
         setCheck({
             ...check,
@@ -38,18 +42,26 @@ export default function Test1(props){
         }
     }
 
-    useEffect(() => asyncCall(), [])
+    useEffect(() => {
+        window.localStorage.setItem("check", JSON.stringify(check));
+    }, asyncCall(), [check])
 
 
     function handleSubmit(e){
-        e.preventDefault();
         if(check.ans_1 ==='' || check.ans_2 ==='' || check.ans_3 ==='' || check.ans_4 ==='' || check.ans_5 ===''){
-            alert('전부 선택 안하면 못 넘어가요. 빠짐 없이 선택하셈.')
+            alert('전부 선택 안하면 저 플젝 제출 못해요. 빠짐 없이 선택하셈.')
         }
         else{
+            history.push({
+            pathname: '/test6',
+            state: {...location.state, ...check}
+            })
             window.location.href ='/test6' // 이동할 다음 페이지
         }
     }
+
+    //전부 선택 안하면 저 플젝 제출 못해요. 빠짐 없이 선택하셈
+
     return(
 
         // div 협곡에 오신걸 환영합니다.
@@ -84,6 +96,7 @@ export default function Test1(props){
                                 onClick={(event) => {
                                     setAnswerList(event.target.value);
                                 }}
+                                onChange={handleChange}
                             >{answer[0]?.answer01}</button>
                         </div>
 
@@ -98,6 +111,7 @@ export default function Test1(props){
                                     setAnswerList(event.target.value);
                                     console.log(event.target.className)
                                 }}
+                                onChange={handleChange}
                             >{answer[0]?.answer02}</button>
                         </div>
 
@@ -143,7 +157,7 @@ export default function Test1(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
-
+                                        onChange={handleChange}
                                     >{answer[1]?.answer01}</button>
                                 </div>
 
@@ -157,7 +171,7 @@ export default function Test1(props){
                                     onClick={(event) => {
                                         setAnswerList(event.target.value);
                                     }}
-
+                                    onChange={handleChange}
                                 > {answer[1]?.answer02} </button>
 
                                 </div>
@@ -202,6 +216,7 @@ export default function Test1(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
+                                        onChange={handleChange}
                                     >{answer[2]?.answer01}</button>
                                 </div>
 
@@ -215,7 +230,7 @@ export default function Test1(props){
                                     onClick={(event) => {
                                         setAnswerList(event.target.value);
                                     }}
-
+                                    onChange={handleChange}
                                 > {answer[2]?.answer02} </button>
 
                                 </div>
@@ -262,7 +277,7 @@ export default function Test1(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
-
+                                        onChange={handleChange}
                                     >{answer[3]?.answer01}</button>
                                 </div>
 
@@ -276,6 +291,7 @@ export default function Test1(props){
                                     onClick={(event) => {
                                         setAnswerList(event.target.value);
                                     }}
+                                    onChange={handleChange}
                                 > {answer[3]?.answer02} </button>
 
                                 </div>
@@ -322,6 +338,7 @@ export default function Test1(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
+                                        onChange={handleChange}
                                     >{answer[4]?.answer01}</button>
                                 </div>
 
@@ -335,6 +352,7 @@ export default function Test1(props){
                                     onClick={(event) => {
                                         setAnswerList(event.target.value);
                                     }}
+                                    onChange={handleChange}
                                 > {answer[4]?.answer02} </button>
 
                                 </div>

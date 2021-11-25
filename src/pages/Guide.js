@@ -11,19 +11,11 @@ const Guide = (props) => {
 
     const history = useHistory();
 
-    // const ChangeHandler = (e) => {
-    //     e.preventDefalut();
-    // }
-
-
     let Numbers = [...Array(50)].map((v, i) => i);
 
     const [answer, setAnswer] = useState([]);
     console.log(answer);
     const [answerlist, setAnswerList] = useState([]);
-
-
-
 
 
     async function asyncCall() {
@@ -37,7 +29,6 @@ const Guide = (props) => {
             console.error(error);
         }
     }
-
     useEffect(() => asyncCall(), [])
 
 

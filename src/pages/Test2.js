@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState, useHistory } from 'react';
-import { Link, } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from "react-router";
+import { Link } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 import Foo from '../components/foo';
 
@@ -10,7 +11,9 @@ export default function Test2(props){
     const [answer, setAnswer] = useState([]);
     console.log(answer);
     const [answerlist, setAnswerList] = useState([]);
-    const [check,setCheck] = useState({
+
+    const location = useLocation();
+    const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
         ans_1: "",
         ans_2: "",
         ans_3: "",
@@ -27,6 +30,7 @@ export default function Test2(props){
     }
 
 
+
     async function asyncCall() {
         try {
             const response = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
@@ -39,17 +43,21 @@ export default function Test2(props){
         }
     }
 
-    useEffect(() => asyncCall(), [])
-
+    useEffect(() => {
+        window.localStorage.setItem("check", JSON.stringify(check));
+    }, asyncCall(), [check])
 
 
 
     function handleSubmit(e){
-        e.preventDefault();
         if(check.ans_1 ==='' || check.ans_2 ==='' || check.ans_3 ==='' || check.ans_4 ==='' || check.ans_5 ===''){
             alert('전부 선택 안하면 못 넘어가요. 빠짐 없이 선택하셈.')
         }
         else{
+            history.push({
+            pathname: '/test3',
+            state: {...location.state, ...check}
+            }) //체크한 데이터 데이터 넘겨주기
             window.location.href ='/test3' // 이동할 다음 페이지
         }
     }
@@ -84,7 +92,10 @@ export default function Test2(props){
                                     value={answer[0]?.answer01}
                                     onClick={(event) => {
                                         setAnswerList(event.target.value);
+                                        console.log(event.target.className)
                                     }}
+                                    
+                                    onChange={handleChange}
                                 >{answer[0]?.answer01}</button>
                             </div>
 
@@ -99,6 +110,7 @@ export default function Test2(props){
                                         setAnswerList(event.target.value);
                                         console.log(event.target.className)
                                     }}
+                                    onChange={handleChange}
                                 >{answer[0]?.answer02}</button>
                             </div>
 
@@ -144,7 +156,7 @@ export default function Test2(props){
                                             onClick={(event) => {
                                                 setAnswerList(event.target.value);
                                             }}
-
+                                            onChange={handleChange}
                                         >{answer[1]?.answer01}</button>
                                     </div>
 
@@ -158,6 +170,7 @@ export default function Test2(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
+                                        onChange={handleChange}
 
                                     > {answer[1]?.answer02} </button>
 
@@ -204,6 +217,7 @@ export default function Test2(props){
                                             onClick={(event) => {
                                                 setAnswerList(event.target.value);
                                             }}
+                                            onChange={handleChange}
                                         >{answer[2]?.answer01}</button>
                                     </div>
 
@@ -217,6 +231,7 @@ export default function Test2(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
+                                        onChange={handleChange}
 
                                     > {answer[2]?.answer02} </button>
 
@@ -264,6 +279,7 @@ export default function Test2(props){
                                             onClick={(event) => {
                                                 setAnswerList(event.target.value);
                                             }}
+                                            onChange={handleChange}
 
                                         >{answer[3]?.answer01}</button>
                                     </div>
@@ -278,6 +294,7 @@ export default function Test2(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
+                                        onChange={handleChange}
                                     > {answer[3]?.answer02} </button>
 
                                     </div>
@@ -324,6 +341,7 @@ export default function Test2(props){
                                             onClick={(event) => {
                                                 setAnswerList(event.target.value);
                                             }}
+                                            onChange={handleChange}
                                         >{answer[4]?.answer01}</button>
                                     </div>
 
@@ -337,6 +355,7 @@ export default function Test2(props){
                                         onClick={(event) => {
                                             setAnswerList(event.target.value);
                                         }}
+                                        onChange={handleChange}
                                     > {answer[4]?.answer02} </button>
 
                                     </div>

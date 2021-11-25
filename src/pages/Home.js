@@ -104,6 +104,7 @@ const Home = (props) => {
                     <h4 className="qustionNumber"> Q3 </h4>
                     <h5 className="qustionText">{QuestionData[3]}</h5>
                     <Select
+                        className="select"
                         value={selectedOption}
                         onChange={(option)=>{
                             setSelectedOption(option)
