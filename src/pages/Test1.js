@@ -10,7 +10,7 @@ export default function Test1(props){
     const { history } = props;
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
-    // console.log(answer);
+    console.log(answer);
     const [answerlist, setAnswerList] = useState({});
     const location = useLocation();
     const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
@@ -50,6 +50,7 @@ export default function Test1(props){
 
 
     function handleSubmit(e){
+        e.preventDefault();
         if (check.ans_1 ==='' ||
             check.ans_2 ==='' ||
             check.ans_3 ==='' ||
@@ -429,8 +430,6 @@ export default function Test1(props){
 
 
                 </div>
-
-
 
 
         </div>

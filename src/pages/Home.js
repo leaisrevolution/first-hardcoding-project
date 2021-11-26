@@ -36,6 +36,8 @@ const Home = (props) => {
         userName: "",
         userAge: "",
     });
+
+    console.log(userid);
     const [userGender,setUserGender] = useState({})
     const location = useLocation();
 
@@ -57,8 +59,11 @@ const Home = (props) => {
         e.preventDefault();
         console.log(userid);
         console.log(userGender.value);
-        if (userid.userName === '' || userid.userAge === '' || !userGender.value)
-        {alert("제대로 입력한거 맞음요...?")}
+
+        if (userid.userName === '' ||
+            userid.userAge === '' ||
+            !userGender.value)
+        {alert("제대로 다 입력한거 맞음요...?")}
         else {
             history.push({
                 pathname: '/guide',
@@ -100,10 +105,12 @@ const Home = (props) => {
                         className = "inputName"
                         type="text"
                         value={userid.userName}
-                        onChange={handleChange
-                        }
-                    />
+                        onChange={handleChange}
+
+                        />
+
                 </div>
+
 
                 <div className = "Q">
                     <h4 className="qustionNumber"> Q2 </h4>
@@ -113,8 +120,7 @@ const Home = (props) => {
                         className = "inputName"
                         type="text"
                         value={userid.userAge}
-                        onChange={handleChange
-                        }
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -125,7 +131,7 @@ const Home = (props) => {
                         className="select"
                         name="userGender"
                         onChange={(e)=>setUserGender(e)}
-                        options={options} //margin-top을 주고싶은데 먹히지 않아요..
+                        options={options}
                     />
 
                 </div>

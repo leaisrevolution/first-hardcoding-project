@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 // import ProgressBar from "./ProgressBar.js";
 import { Link, useHistory } from 'react-router-dom';
 import MainNav from '../components/mainNav';
@@ -13,9 +14,34 @@ const Guide = (props) => {
 
     let Numbers = [...Array(50)].map((v, i) => i);
 
+    const location = useLocation();
     const [answer, setAnswer] = useState([]);
-    console.log(answer);
     const [answerlist, setAnswerList] = useState([]);
+
+    const [check,setCheck] = useState({
+        checked : ""
+    });
+
+    const handleChange = e => {
+        setCheck({
+            [e.target.name] : e.target.value
+        })
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        if(check.checked === ''){
+            alert('하나를 체크하세요!')
+        }
+        else{
+            history.push({
+                pathname: '/test1',
+                state: {...location.state}
+            })
+            window.location.href ='/test1'
+        }
+    }
+
 
 
     async function asyncCall() {
@@ -49,12 +75,8 @@ const Guide = (props) => {
 
         <div>
 
-            <MainNav />
-
-            <div className="wrap">
-
-                <div className="container">
-
+        <MainNav />
+            <div className="container">
 
                     <div className="main">
                         <h1 className = "title"> {contentList[0]} </h1>
@@ -64,124 +86,100 @@ const Guide = (props) => {
                     <div>
                         <h3 className = "title2">{contentList[3]}</h3>
                         <p className = "content">{contentList[4]}</p>
+                    </div>
 
-                        <Foo />
+                    <Foo />
+
+                <div>
+
+                    <div className="questionHead">
+
+                        <h4 className="qustionNumber">
+                            Q{Numbers[1]}.
+                        </h4>
+
+                        <h5 className="qustionText">{answer[0]?.question}</h5>
+
+                    </div>
+
+                    <div className="questionBody">
+                        <div className="btnContainer">
+
+                        <div>
+                            <button className=
+                                            {answerlist[0] == 1
+                                            ?
+                                            "clickedBtn" : "answerBtn"}
+                                name="checked"
+                                value="1"
+                                onClick={(event) => {
+                                    let questionKey = Math.floor((event.target.value - 1) /2 );
+                                    let newObj = {...answerlist, [questionKey]: event.target.value}
+                                    setAnswerList(newObj);
+                                    console.log(event.target.className)
+                                    console.log(event.target.value)
+                                }}
+
+                            >{answer[0]?.answer01}</button>
+                        </div>
+
+                        <div>
+                            <button className=
+                                            {answerlist[0] == 2
+                                            ?
+                                            "clickedBtn" : "answerBtn"}
+                                name="checked"
+                                value="2"
+                                onClick={(event) => {
+                                    let questionKey = Math.floor((event.target.value - 1) /2 );
+                                    let newObj = {...answerlist, [questionKey]: event.target.value}
+                                    setAnswerList(newObj);
+                                    console.log(event.target.className)
+                                    console.log(event.target.value)
+                                }}
+                                // onChange={handleChange}
+                            >{answer[0]?.answer02}</button>
+                        </div>
+
+
+                        </div>
 
                             <div>
-
-                                <form className="questionSection">
-
-                                    <div>
-
-                                        <div className="questionHead">
-
-                                            <h4 className="qustionNumber">
-                                            Q{Numbers[1]}.
-                                            </h4>
-
-                                            <h5 className="qustionText">{answer[0]?.question}</h5>
-
-                                        </div>
-
-                                        <div className="questionBody">
-
-                                            <div className="btnContainer">
-
-                                            <div>
-                                                <button className=
-                                                                {answerlist == answer[0]?.answer01
-                                                                ?
-                                                                "clickedBtn" : "answerBtn"}
-                                                    name="ans_1"
-                                                    value={answer[0]?.answer01}
-                                                    onClick={(event) => {
-                                                        setAnswerList(event.target.value);
-
-                                                    }}
-                                                >{answer[0]?.answer01}</button>
-                                            </div>
-
-                                            <div>
-                                                <button className=
-                                                                {answerlist == answer[0]?.answer02
-                                                                ?
-                                                                "clickedBtn" : "answerBtn"}
-                                                    name="ans_1"
-                                                    value={answer[0]?.answer02}
-                                                    onClick={(event) => {
-                                                        setAnswerList(event.target.value);
-                                                        console.log(event.target.value);
-                                                    }}
-                                                >{answer[0]?.answer02}</button>
-                                            </div>
-
-                                                </div>
-
-                                                <div1>
-                                                    <p className="explanation">
-                                                    > {answer[0]?.answer01} : {answer[0]?.answer03}
-                                                    <br />
-                                                    > {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
-                                                    </div1>
-                                                </div>
-
-                                        <Foo />
-
-                                    </div>
-
-                                </form>
-
+                            <p className="explanation">
+                            > {answer[0]?.answer01} : {answer[0]?.answer03}
+                            <br />
+                            > {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
                             </div>
 
-                            {/* <div Id="btn"> 말 안듣는 코드... 아래에 새로 구현해봄
-
-                                <button
-                                    type="submit"
-                                    className="back"
-                                    onClick={() => {history.push("/");}}> 뒤로가기</button>
-
-                                {
-                                    (answerlist === answer[0]?.answer01) || (answerlist === answer[0]?.answer02) ?
-                                    <Link to="/test1">
-                                        <button
-                                            type="submit"
-                                            className="clickedstart"
-                                            onClick={handleSubmit}
-                                        > 검사시작
-                                        </button>
-                                    </Link>
-                                    :
-                                    <button
-                                        type="submit"
-                                        className="start"
-                                        disabled
-                                    > 검사시작
-                                    </button>
-                                }
-                            </div> */}
+                        </div>
 
 
-                <div Id="btn">
-                    <Link to='/'>
-                        <button type="submit"
-                                className="back"
-                                >뒤로가기</button></Link>
-
-
-                    <Link to='/test1'>
-                        <button type="submit"
-                                className="start">
-                                    다음으로</button> </Link>
                 </div>
 
-                    </div>
+                <Foo />
 
 
-                    </div>
+            <div Id="btn">
+                <Link to='/'>
+                    <button type="submit"
+                            className="back"
+                            >뒤로가기</button></Link>
 
-                </div>
+                    <button type="submit"
+                            className="start"
+                            onClick={handleSubmit}>
+                                다음으로</button>
+            </div>
+
+
+
 
             </div>
+
+
+
+
+    </div>
 
 
     );

@@ -6,14 +6,14 @@ import MainNav from '../components/mainNav';
 import Foo from '../components/foo';
 
 
-export default function Test1(props){
+export default function Test3(props){
     const { history } = props;
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
     // console.log(answer);
-    const [answerlist, setAnswerList] = useState([]);
+    const [answerlist, setAnswerList] = useState({});
     const location = useLocation();
-    const [check,setCheck] = useState({
+    const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
         ans_11: "",
         ans_12: "",
         ans_13: "",
@@ -29,7 +29,6 @@ export default function Test1(props){
         })
     }
 
-
     async function asyncCall() {
         try {
             const response = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
@@ -44,14 +43,20 @@ export default function Test1(props){
 
     useEffect(() => {
         window.localStorage.setItem("check", JSON.stringify(check));
-    }, asyncCall(), [check])
+        asyncCall()
+    }, [check])
 
 
     function handleSubmit(e){
-        if(check.ans_1 ==='' || check.ans_2 ==='' || check.ans_3 ==='' || check.ans_4 ==='' || check.ans_5 ===''){
+        e.preventDefault();
+        if (check.ans_11 ==='' ||
+            check.ans_12 ==='' ||
+            check.ans_13 ==='' ||
+            check.ans_14 ==='' ||
+            check.ans_15 ===''){
             alert('조금만 더 힘내서 선택해보셈.. 빠트린거 있음')
         }
-        else{
+        else {
             history.push({
             pathname: '/test4',
             state: {...location.state, ...check}
@@ -71,7 +76,7 @@ export default function Test1(props){
                         <div className="questionHead">
 
                             <h4 className="qustionNumber">
-                                Q{Numbers[1]}.
+                                Q{Numbers[11]}.
                             </h4>
 
                             <h5 className="qustionText">{answer[0]?.question}</h5>
@@ -82,33 +87,37 @@ export default function Test1(props){
                             <div className="btnContainer">
 
                             <div>
-                                <button className=
-                                                {answerlist == 21
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
-                                    name="ans_11"
-                                    value="21"
-                                    onClick={(event) => {
-                                        setAnswerList(event.target.value);
+                                <button className =
+                                                {answerlist[0] == 1
+                                                    ?
+                                                    "clickedBtn" : "answerBtn"}
+                                    name ="ans_11"
+                                    value ="1"
+                                    onClick ={(event) => {
+                                        let questionKey = Math.floor((event.target.value - 1) /2 );
+                                        let newObj = {...answerlist, [questionKey]: event.target.value}
+                                        setAnswerList(newObj);
                                         console.log(event.target.className)
                                     }}
                                     onChange={handleChange}
-
                                 >{answer[0]?.answer01}</button>
                             </div>
 
                             <div>
-                                <button className=
-                                                {answerlist == 22
+                                <button className =
+                                                {answerlist[0] == 2
                                                 ?
                                                 "clickedBtn" : "answerBtn"}
-                                    name="ans_11"
-                                    value="22"
-                                    onClick={(event) => {
-                                        setAnswerList(event.target.value);
-                                    }}
-                                    onChange={handleChange}
-                                >{answer[0]?.answer02}</button>
+                                        name ="ans_11"
+                                        value ="2"
+                                        onClick ={(event) => {
+                                            let questionKey = Math.floor((event.target.value - 1) /2 );
+                                            let newObj = {...answerlist, [questionKey]: event.target.value}
+                                            setAnswerList(newObj);
+                                            console.log(event.target.className)
+                                        }}
+                                        onChange = {handleChange}
+                                    >{answer[0]?.answer02}</button>
                             </div>
 
 
@@ -133,7 +142,7 @@ export default function Test1(props){
                         <div className="questionHead">
 
                             <h4 className="qustionNumber">
-                                Q{Numbers[2]}.
+                                Q{Numbers[12]}.
                             </h4>
 
                             <h5 className="qustionText">{answer[0]?.question}</h5>
@@ -144,15 +153,17 @@ export default function Test1(props){
                             <div className="btnContainer">
 
                                     <div>
-                                        <button className=
-                                                {answerlist == 23
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                    <button className=
+                                            {answerlist[1] == 3
+                                            ?
+                                            "clickedBtn" : "answerBtn"}
                                             name="ans_12"
-                                            value="23"
+                                            value="3"
                                             onClick={(event) => {
-                                                setAnswerList(event.target.value);
-
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
                                             }}
 
                                             onChange={handleChange}
@@ -162,15 +173,17 @@ export default function Test1(props){
 
                                     <div>
                                     <button className=
-                                                {answerlist == 24
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
-                                        name="ans_12"
-                                        value="24"
-                                        onClick={(event) => {
-                                            setAnswerList(event.target.value);
-
-                                        }}
+                                            {answerlist[1] == 4
+                                            ?
+                                            "clickedBtn" : "answerBtn"}
+                                            name="ans_12"
+                                            value="4"
+                                            oonClick={(event) => {
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
+                                            }}
                                         onChange={handleChange}
                                     > {answer[1]?.answer02} </button>
 
@@ -196,7 +209,7 @@ export default function Test1(props){
                         <div className="questionHead">
 
                             <h4 className="qustionNumber">
-                                Q{Numbers[3]}.
+                                Q{Numbers[13]}.
                             </h4>
 
                             <h5 className="qustionText">{answer[0]?.question}</h5>
@@ -207,15 +220,17 @@ export default function Test1(props){
                             <div className="btnContainer">
 
                                     <div>
-                                        <button className=
-                                                {answerlist == 25
-                                                ?
+                                    <button className=
+                                            {answerlist[2] == 5
+                                            ?
                                                 "clickedBtn" : "answerBtn"}
                                             name="ans_13"
-                                            value="25"
+                                            value="5"
                                             onClick={(event) => {
-                                                setAnswerList(event.target.value);
-
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
                                             }}
                                             onChange={handleChange}
                                         >{answer[2]?.answer01}</button>
@@ -223,14 +238,16 @@ export default function Test1(props){
 
                                     <div>
                                     <button className=
-                                                {answerlist == 26
-                                                ?
+                                            {answerlist[2] == 6
+                                            ?
                                                 "clickedBtn" : "answerBtn"}
                                         name="ans_13"
-                                        value="26"
+                                        value="6"
                                         onClick={(event) => {
-                                            setAnswerList(event.target.value);
-
+                                            let questionKey = Math.floor((event.target.value - 1) /2 );
+                                            let newObj = {...answerlist, [questionKey]: event.target.value}
+                                            setAnswerList(newObj);
+                                            console.log(event.target.className)
                                         }}
                                         onChange={handleChange}
 
@@ -261,7 +278,7 @@ export default function Test1(props){
                         <div className="questionHead">
 
                             <h4 className="qustionNumber">
-                            Q{Numbers[4]}.
+                            Q{Numbers[14]}.
                             </h4>
 
                             <h5 className="qustionText">{answer[0]?.question}</h5>
@@ -272,15 +289,17 @@ export default function Test1(props){
                             <div className="btnContainer">
 
                                     <div>
-                                        <button className=
-                                                {answerlist == 27
-                                                ?
+                                    <button className=
+                                            {answerlist[3] == 7
+                                            ?
                                                 "clickedBtn" : "answerBtn"}
                                             name="ans_14"
-                                            value="27"
+                                            value="7"
                                             onClick={(event) => {
-                                                setAnswerList(event.target.value);
-
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
                                             }}
                                             onChange={handleChange}
 
@@ -289,14 +308,16 @@ export default function Test1(props){
 
                                     <div>
                                     <button className=
-                                                {answerlist == 28
-                                                ?
+                                            {answerlist[3] == 8
+                                            ?
                                                 "clickedBtn" : "answerBtn"}
-                                        name="ans_14"
-                                        value="28"
-                                        onClick={(event) => {
-                                            setAnswerList(event.target.value);
-
+                                            name="ans_14"
+                                            value="8"
+                                            onClick={(event) => {
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
                                         }}
                                         onChange={handleChange}
                                     > {answer[3]?.answer02} </button>
@@ -326,7 +347,7 @@ export default function Test1(props){
                         <div className="questionHead">
 
                             <h4 className="qustionNumber">
-                            Q{Numbers[5]}.
+                            Q{Numbers[15]}.
                             </h4>
 
                             <h5 className="qustionText">{answer[0]?.question}</h5>
@@ -337,15 +358,17 @@ export default function Test1(props){
                             <div className="btnContainer">
 
                                     <div>
-                                        <button className=
-                                                {answerlist == 29
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                    <button className=
+                                            {answerlist[4] == 9
+                                            ?
+                                            "clickedBtn" : "answerBtn"}
                                             name="ans_15"
-                                            value="29"
+                                            value="9"
                                             onClick={(event) => {
-                                                setAnswerList(event.target.value);
-
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
                                             }}
                                             onChange={handleChange}
                                         >{answer[4]?.answer01}</button>
@@ -353,14 +376,16 @@ export default function Test1(props){
 
                                     <div>
                                     <button className=
-                                                {answerlist == 30
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
-                                        name="ans_15"
-                                        value="30"
-                                        onClick={(event) => {
-                                            setAnswerList(event.target.value);
-
+                                            {answerlist[4] == 10
+                                            ?
+                                            "clickedBtn" : "answerBtn"}
+                                            name="ans_15"
+                                            value="10"
+                                            oonClick={(event) => {
+                                                let questionKey = Math.floor((event.target.value - 1) /2 );
+                                                let newObj = {...answerlist, [questionKey]: event.target.value}
+                                                setAnswerList(newObj);
+                                                console.log(event.target.className)
                                         }}
                                         onChange={handleChange}
                                     > {answer[4]?.answer02} </button>
@@ -387,7 +412,7 @@ export default function Test1(props){
 
 
                 <div Id="btn">
-                    <Link to='/guide'>
+                    <Link to='/test2'>
                         <button type="submit"
                                 className="back"
                                 >뒤로가기</button></Link>
