@@ -6,6 +6,7 @@ import MainNav from '../components/mainNav';
 import Foo from '../components/foo';
 
 
+
 //기능구현 실패하는 것:
 //시간남으면 해야 할 것 : div를 모조리 정리해버리기
 
@@ -54,7 +55,6 @@ const Home = (props) => {
     };
 
 
-
     function handleSubmit(e) {
         e.preventDefault();
         console.log(userid);
@@ -76,18 +76,19 @@ const Home = (props) => {
 
     return (
         <div>
-            <MainNav />
             <div className="wrap">
+                <MainNav />
+
                 <div className="container">
 
 
-                    <div className="main">
-                    <h1 className="title"> {contentList[0]} </h1>
-                    <p className="content">
-                        {" "}
-                        {contentList[1]} <br />
-                        {contentList[2]}
-                    </p>
+                    <div>
+                        <h1 className="title"> {contentList[0]} </h1>
+                        <p className="content">
+                            {" "}
+                            {contentList[1]} <br />
+                            {contentList[2]}
+                        </p>
                     </div>
 
                 <div>

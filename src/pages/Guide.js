@@ -8,40 +8,24 @@ import Foo from '../components/foo';
 
 
 
-const Guide = (props) => {
-
-    const history = useHistory();
+const Guide = ({history}) => {
 
     let Numbers = [...Array(50)].map((v, i) => i);
 
     const location = useLocation();
     const [answer, setAnswer] = useState([]);
     const [answerlist, setAnswerList] = useState([]);
+    const [isCheck,setIsCheck ] = useState(false)
 
-    const [check,setCheck] = useState({
-        checked : ""
-    });
 
-    const handleChange = e => {
-        setCheck({
-            [e.target.name] : e.target.value
-        })
+    const buttonOnClick = (event) => {
+        let questionKey = Math.floor((event.target.value - 1) /2 );
+        let newObj = {...answerlist, [questionKey]: event.target.value}
+        setAnswerList(newObj);
+        console.log(event.target.className)
+        console.log(event.target.value)
+        setIsCheck(true)
     }
-
-    function handleSubmit(e){
-        e.preventDefault();
-        if(check.checked === ''){
-            alert('하나를 체크하세요!')
-        }
-        else{
-            history.push({
-                pathname: '/test1',
-                state: {...location.state}
-            })
-            window.location.href ='/test1'
-        }
-    }
-
 
 
     async function asyncCall() {
@@ -68,7 +52,6 @@ const Guide = (props) => {
 
 
 
-
     return (
 
         // div 협곡에 오신걸 환영합니다.. 이건 div협곡 맛보기
@@ -76,6 +59,7 @@ const Guide = (props) => {
         <div>
 
         <MainNav />
+
             <div className="container">
 
                     <div className="main">
@@ -85,6 +69,7 @@ const Guide = (props) => {
 
                     <div>
                         <h3 className = "title2">{contentList[3]}</h3>
+
                         <p className = "content">{contentList[4]}</p>
                     </div>
 
@@ -105,50 +90,31 @@ const Guide = (props) => {
                     <div className="questionBody">
                         <div className="btnContainer">
 
-                        <div>
                             <button className=
                                             {answerlist[0] == 1
                                             ?
                                             "clickedBtn" : "answerBtn"}
-                                name="checked"
+                                name="answer"
                                 value="1"
-                                onClick={(event) => {
-                                    let questionKey = Math.floor((event.target.value - 1) /2 );
-                                    let newObj = {...answerlist, [questionKey]: event.target.value}
-                                    setAnswerList(newObj);
-                                    console.log(event.target.className)
-                                    console.log(event.target.value)
-                                }}
-
+                                onClick = {buttonOnClick}
                             >{answer[0]?.answer01}</button>
-                        </div>
 
-                        <div>
                             <button className=
                                             {answerlist[0] == 2
                                             ?
                                             "clickedBtn" : "answerBtn"}
-                                name="checked"
+                                name="answer"
                                 value="2"
-                                onClick={(event) => {
-                                    let questionKey = Math.floor((event.target.value - 1) /2 );
-                                    let newObj = {...answerlist, [questionKey]: event.target.value}
-                                    setAnswerList(newObj);
-                                    console.log(event.target.className)
-                                    console.log(event.target.value)
-                                }}
-                                // onChange={handleChange}
+                                onClick = {buttonOnClick}
                             >{answer[0]?.answer02}</button>
-                        </div>
-
 
                         </div>
 
                             <div>
-                            <p className="explanation">
-                            > {answer[0]?.answer01} : {answer[0]?.answer03}
-                            <br />
-                            > {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
+                                <p className="explanation">
+                                &gt; {answer[0]?.answer01} : {answer[0]?.answer03}
+                                <br />
+                                &gt; {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
                             </div>
 
                         </div>
@@ -165,10 +131,22 @@ const Guide = (props) => {
                             className="back"
                             >뒤로가기</button></Link>
 
+
+                    {
+                    // (answer === '1') || (answer === '2') ?
+                    isCheck ?
                     <button type="submit"
                             className="start"
-                            onClick={handleSubmit}>
+                            onClick={ (event) => { history.push("/test1")}}
+                            >
                                 다음으로</button>
+                    :
+                    <button type="submit"
+                            className="start"
+                            disabled >
+                                다음으로</button>
+                    }
+
             </div>
 
 
