@@ -11,9 +11,9 @@ export default function Test3(){
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
     // console.log(answer);
-    // const [answerlist, setAnswerList] = useState({});
+
     const location = useLocation();
-    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist3")));
+    let [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
     if (answerlist == null) {
         answerlist = {
             [0]: undefined,
@@ -24,6 +24,7 @@ export default function Test3(){
         };
     }
 
+    console.log(location.state)
     console.log(answerlist);
 
     const handleChange = e => {
@@ -105,12 +106,7 @@ export default function Test3(){
                                                     "clickedBtn" : "answerBtn"}
                                     name ="ans_11"
                                     value ="1"
-                                    onClick ={(event) => {
-                                        let questionKey = Math.floor((event.target.value - 1) /2 );
-                                        let newObj = {...answerlist, [questionKey]: event.target.value}
-                                        setAnswerList(newObj);
-                                        console.log(event.target.className)
-                                    }}
+                                    onClick ={buttonOnClick}
                                     onChange={handleChange}
                                 >{answer[0]?.answer01}</button>
                             </div>
@@ -122,12 +118,7 @@ export default function Test3(){
                                                 "clickedBtn" : "answerBtn"}
                                         name ="ans_11"
                                         value ="2"
-                                        onClick ={(event) => {
-                                            let questionKey = Math.floor((event.target.value - 1) /2 );
-                                            let newObj = {...answerlist, [questionKey]: event.target.value}
-                                            setAnswerList(newObj);
-                                            console.log(event.target.className)
-                                        }}
+                                        onClick ={buttonOnClick}
                                         onChange = {handleChange}
                                     >{answer[0]?.answer02}</button>
                             </div>

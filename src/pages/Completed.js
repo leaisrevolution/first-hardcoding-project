@@ -1,8 +1,23 @@
-import { Link } from 'react-router-dom';
-import MainNav from '../components/mainNav';
 
-const Completed = (props) => {
-    const { history } = props;
+import { useLocation } from "react-router";
+import { Link, useHistory } from 'react-router-dom';
+import MainNav from '../components/mainNav';
+import Foo from '../components/foo';
+
+const Completed = () => {
+    const history = useHistory();
+    const location = useLocation();
+
+    function handleClick() {
+        history.push({
+            pathname : '/result',
+            state: {...location.state},
+        })
+        window.location.href ='/result'
+    }
+    console.log(location.state)
+
+
     return (
 
         <div>
@@ -10,15 +25,16 @@ const Completed = (props) => {
                 <div className="wrap">
                     <div className="container">
                         <div className="main">
-                            <h1 className="title"> 검사가 완료 되었습니다. </h1>
-                            {/* <p className="content">
+                            <h3 className="title"> 검사가 완료 되었습니다.</h3>
+                            <p className="content">
                                 {" "}
-                                검사결과는 여러분이 직업을 선택할 때 <br /> 상대적으로
-                                어떠한 가치를 주요하게 생각하는지를 알려주고,
+                                모든 응답이 완료되었습니다. 고생하셨습니다.
                                 <br />
-                                중요 가치를 충족시켜줄 수 있는 직업에 대해 생각해 볼 기회를 제공합니다.
-                            </p> */}
-                            <hr className="foo" />
+                                결과 보기 버튼을 누르시면 검사 결과에 대해 상세히 볼 수 있습니다.
+                                <br />
+                                감사합니다.
+                            </p>
+                            <Foo />
                         </div>
 
                         <div Id="">
@@ -26,7 +42,7 @@ const Completed = (props) => {
                                 <button
                                     type="submit"
                                     className="end"
-                                    onClick={() => {history.push("/result")}}> 결과보기
+                                    onClick={{handleClick}}> 결과보기
                                 </button>
                             </Link>
                         </div>

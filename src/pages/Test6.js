@@ -1,32 +1,46 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from "react-router";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 import Foo from '../components/foo';
 
 
-export default function Test6(props){
-    const { history } = props;
+export default function Test6(){
+    const history = useHistory();
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
-    // console.log(answer);
-    const [answerlist, setAnswerList] = useState({});
-    const location = useLocation();
-    const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
-        ans_26: "",
-        ans_27: "",
-        ans_28: "",
 
-    });
+    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
+    if (answerlist == null) {
+        answerlist = {
+            [0]: undefined,
+            [1]: undefined,
+            [2]: undefined,
+        };
+    }
+
+
+    const location = useLocation();
     console.log(answerlist);
-    console.log(check);
+
 
     const handleChange = e => {
-        setCheck({
-            ...check,
+        setAnswerList({
+            ...answerlist,
             [e.target.name] : e.target.value
         })
+    }
+
+
+
+
+    const buttonOnClick = (event) => {
+        let questionKey = Math.floor((event.target.value - 1) /2 );
+        let newObj = {...answerlist, [questionKey]: event.target.value}
+        setAnswerList(newObj);
+        console.log(event.target.className)
+        console.log(event.target.value)
     }
 
 
@@ -34,7 +48,7 @@ export default function Test6(props){
         try {
             const response = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
             const res = response.data.RESULT;
-            setAnswer(res.splice(25, 28))
+            setAnswer(res.splice(25,28))
 
             return res;
         } catch(error) {
@@ -43,26 +57,29 @@ export default function Test6(props){
     }
 
     useEffect(() => {
-        window.localStorage.setItem("check", JSON.stringify(check));
+        window.localStorage.setItem("answerlist", JSON.stringify(answerlist));
         asyncCall()
-    }, [check])
+    }, [answerlist])
 
 
     function handleSubmit(e){
         e.preventDefault();
-        if( check.ans_26 ==='' ||
-            check.ans_27 ==='' ||
-            check.ans_28 ===''){
-            alert('고생하셨어요. 그런데 또 빠트린게 있으시네요.')
+        if( answerlist.ans_26 ==='' ||
+            answerlist.ans_27 ==='' ||
+            answerlist.ans_28 ==='' ) {
+            alert('힘드시나요? 전 이 코드 짜느랴 더 힘들었답니다. 홧팅..')
         }
         else {
             history.push({
-            pathname: '/completed',
-            state: {...location.state, ...check}
+            pathname: '/result',
+            state: {...location.state, ...answerlist}
             })
-            window.location.href ='/completed' // 이동할 다음 페이지
+            window.location.href ='completed'  // 이동할 다음 페이지
         }
     }
+    console.log(location.state)
+
+
     return(
 
         <div>
@@ -86,18 +103,13 @@ export default function Test6(props){
                             <div className="btnContainer">
 
                             <div>
-                            <button className=
+                                <button className=
                                                 {answerlist[0] == 1
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                                    ?
+                                                    "clickedBtn" : "answerBtn"}
                                     name="ans_26"
                                     value="1"
-                                    onClick={(event) => {
-                                        let questionKey = Math.floor((event.target.value - 1) /2 );
-                                        let newObj = {...answerlist, [questionKey]: event.target.value}
-                                        setAnswerList(newObj);
-                                        console.log(event.target.className)
-                                    }}
+                                    onClick={buttonOnClick}
                                     onChange={handleChange}
 
                                 >{answer[0]?.answer01}</button>
@@ -106,16 +118,11 @@ export default function Test6(props){
                             <div>
                                 <button className=
                                                 {answerlist[0] == 2
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                                    ?
+                                                    "clickedBtn" : "answerBtn"}
                                     name="ans_26"
                                     value="2"
-                                    onClick={(event) => {
-                                        let questionKey = Math.floor((event.target.value - 1) /2 );
-                                        let newObj = {...answerlist, [questionKey]: event.target.value}
-                                        setAnswerList(newObj);
-                                        console.log(event.target.className)
-                                    }}
+                                    onClick={buttonOnClick}
                                     onChange={handleChange}
                                 >{answer[0]?.answer02}</button>
                             </div>
@@ -125,9 +132,9 @@ export default function Test6(props){
 
                                 <div>
                                 <p className="explanation">
-                                > {answer[0]?.answer01} : {answer[0]?.answer03}
+                                &gt; {answer[0]?.answer01} : {answer[0]?.answer03}
                                 <br />
-                                > {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
+                                &gt; {answer[0]?.answer02} : {answer[0]?.answer04}  </p>
                                 </div>
 
                             </div>
@@ -155,16 +162,11 @@ export default function Test6(props){
                                     <div>
                                         <button className=
                                                 {answerlist[1] == 3
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                                    ?
+                                                    "clickedBtn" : "answerBtn"}
                                             name="ans_27"
                                             value="3"
-                                            onClick={(event) => {
-                                                let questionKey = Math.floor((event.target.value - 1) /2 );
-                                                let newObj = {...answerlist, [questionKey]: event.target.value}
-                                                setAnswerList(newObj);
-                                                console.log(event.target.className)
-                                            }}
+                                            onClick={buttonOnClick}
                                             onChange={handleChange}
 
                                         >{answer[1]?.answer01}</button>
@@ -173,16 +175,11 @@ export default function Test6(props){
                                     <div>
                                     <button className=
                                                 {answerlist[1] == 4
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                                    ?
+                                                    "clickedBtn" : "answerBtn"}
                                         name="ans_27"
                                         value="4"
-                                        onClick={(event) => {
-                                            let questionKey = Math.floor((event.target.value - 1) /2 );
-                                            let newObj = {...answerlist, [questionKey]: event.target.value}
-                                            setAnswerList(newObj);
-                                            console.log(event.target.className)
-                                        }}
+                                        onClick={buttonOnClick}
                                         onChange={handleChange}
                                     > {answer[1]?.answer02} </button>
 
@@ -192,9 +189,9 @@ export default function Test6(props){
 
                             <div>
                                     <p className="explanation">
-                                    > {answer[1]?.answer01} : {answer[1]?.answer03}
+                                    &gt; {answer[1]?.answer01} : {answer[1]?.answer03}
                                     <br />
-                                    > {answer[1]?.answer02} : {answer[1]?.answer04}  </p>
+                                    &gt; {answer[1]?.answer02} : {answer[1]?.answer04}  </p>
                             </div>
 
                         </div>
@@ -221,16 +218,11 @@ export default function Test6(props){
                                     <div>
                                         <button className=
                                                 {answerlist[2] == 5
-                                                ?
-                                                "clickedBtn" : "answerBtn"}
+                                                    ?
+                                                    "clickedBtn" : "answerBtn"}
                                             name="ans_28"
                                             value="5"
-                                            onClick={(event) => {
-                                                let questionKey = Math.floor((event.target.value - 1) /2 );
-                                                let newObj = {...answerlist, [questionKey]: event.target.value}
-                                                setAnswerList(newObj);
-                                                console.log(event.target.className)
-                                            }}
+                                            onClick={buttonOnClick}
                                             onChange={handleChange}
                                         >{answer[2]?.answer01}</button>
                                     </div>
@@ -239,15 +231,10 @@ export default function Test6(props){
                                     <button className=
                                                 {answerlist[2] == 6
                                                     ?
-                                                "clickedBtn" : "answerBtn"}
+                                                    "clickedBtn" : "answerBtn"}
                                         name="ans_28"
                                         value="6"
-                                        onClick={(event) => {
-                                            let questionKey = Math.floor((event.target.value - 1) /2 );
-                                            let newObj = {...answerlist, [questionKey]: event.target.value}
-                                            setAnswerList(newObj);
-                                            console.log(event.target.className)
-                                        }}
+                                        onClick={buttonOnClick}
                                         onChange={handleChange}
 
                                     > {answer[2]?.answer02} </button>
@@ -260,9 +247,9 @@ export default function Test6(props){
 
                             <div>
                                     <p className="explanation">
-                                    > {answer[2]?.answer01} : {answer[2]?.answer03}
+                                    &gt; {answer[2]?.answer01} : {answer[2]?.answer03}
                                     <br />
-                                    > {answer[2]?.answer02} : {answer[2]?.answer04}  </p>
+                                    &gt; {answer[2]?.answer02} : {answer[2]?.answer04}  </p>
                             </div>
 
                         </div>
@@ -271,9 +258,6 @@ export default function Test6(props){
                     </div>
 
                     <Foo />
-
-
-
 
 
                 <div Id="btn">

@@ -11,7 +11,7 @@ export default function Test5(){
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
     // console.log(answer);
-    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist5")));
+    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
     if (answerlist == null) {
         answerlist = {
             [0]: undefined,
@@ -25,6 +25,7 @@ export default function Test5(){
 
     const location = useLocation();
     console.log(answerlist);
+    console.log(location.state)
 
     const handleChange = e => {
         setAnswerList({
@@ -77,6 +78,8 @@ export default function Test5(){
             window.location.href ='/test6'  // 이동할 다음 페이지
         }
     }
+
+
     return(
 
         <div>

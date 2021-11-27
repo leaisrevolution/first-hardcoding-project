@@ -14,18 +14,6 @@ export default function Test1(){
     console.log(answer);
     const location = useLocation();
 
-    // let [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
-    // if (answerlist == null) {
-    //     setAnswerList({
-    //         [0]: undefined,
-    //         [1]: undefined,
-    //         [2]: undefined,
-    //         [3]: undefined,
-    //         [4]: undefined
-    //     })
-    // }
-    // }
-
     let [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
     if (answerlist == null) {
         answerlist = {
@@ -37,7 +25,7 @@ export default function Test1(){
         };
     }
 
-
+    console.log(location.state)
     console.log(answerlist);
 
 

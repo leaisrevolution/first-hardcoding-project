@@ -11,7 +11,8 @@ export default function Test2(){
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
     const location = useLocation();
-    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist2")));
+    console.log(location.state)
+    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
     if (answerlist == null) {
         answerlist = {
             [0]: undefined,

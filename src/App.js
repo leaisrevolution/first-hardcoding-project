@@ -17,6 +17,7 @@ import Result from './pages/Result';
 
 
 
+
 function App() {
 
     return (
@@ -32,7 +33,7 @@ function App() {
                 <Route path='/test5'><Test5></Test5> </Route>
                 <Route path='/test6'><Test6></Test6> </Route>
                 <Route exact path="/completed" component={Completed} />
-                <Route exact path="/result" component={Result} />
+                <Route path="/result"><Result></Result></Route>
             </BrowserRouter>
         </div>
     );

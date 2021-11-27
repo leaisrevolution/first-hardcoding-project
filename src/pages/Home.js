@@ -1,15 +1,9 @@
 import React, { useState  } from 'react';
 import { useLocation } from "react-router";
 import Select from 'react-select';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import MainNav from '../components/mainNav';
 import Foo from '../components/foo';
-
-
-
-//기능구현 실패하는 것:
-//시간남으면 해야 할 것 : div를 모조리 정리해버리기
-
 
 
 const options = [
@@ -40,7 +34,7 @@ const Home = (props) => {
 
     console.log(userid);
     const [userGender,setUserGender] = useState({})
-    const location = useLocation();
+
 
     // const [name, setName] = useState('');
     // const [age, setAge] = useState('');
@@ -81,7 +75,6 @@ const Home = (props) => {
 
                 <div className="container">
 
-
                     <div>
                         <h1 className="title"> {contentList[0]} </h1>
                         <p className="content">
@@ -91,10 +84,12 @@ const Home = (props) => {
                         </p>
                     </div>
 
-                <div>
-                    <h3 className = "title2">{QuestionData[0]}</h3>
                     <Foo />
-                </div>
+
+                    <div>
+                        <h3 className = "title2">{QuestionData[0]}</h3>
+                        {/* <Foo /> */}
+                    </div>
 
             <form onSubmit={ handleSubmit }>
                 <div className = "Q">

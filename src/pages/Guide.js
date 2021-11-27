@@ -17,6 +17,8 @@ const Guide = ({history}) => {
     const [answerlist, setAnswerList] = useState([]);
     const [isCheck,setIsCheck ] = useState(false)
 
+    console.log(location.state)
+
 
     const buttonOnClick = (event) => {
         let questionKey = Math.floor((event.target.value - 1) /2 );
@@ -67,13 +69,13 @@ const Guide = ({history}) => {
                         <p className = "content"> {contentList[1]} <br/>{contentList[2]}</p>
                     </div>
 
+                    <Foo />
+
                     <div>
                         <h3 className = "title2">{contentList[3]}</h3>
 
                         <p className = "content">{contentList[4]}</p>
                     </div>
-
-                    <Foo />
 
                 <div>
 
@@ -137,7 +139,12 @@ const Guide = ({history}) => {
                     isCheck ?
                     <button type="submit"
                             className="start"
-                            onClick={ (event) => { history.push("/test1")}}
+                            onClick={ (event) => { history.push({
+                                                    pathname: '/test1',
+                                                    state: {...location.state}
+                                                    })
+                                                    window.location.href ='/test1'
+                            }}
                             >
                                 다음으로</button>
                     :

@@ -11,7 +11,7 @@ export default function Test4(){
     let Numbers = [...Array(50)].map((v, i) => i);
     const [answer, setAnswer] = useState([]);
     // console.log(answer);
-    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist4")));
+    const [answerlist, setAnswerList] = useState(()=> JSON.parse(window.localStorage.getItem("answerlist")));
     if (answerlist == null) {
         answerlist = {
             [0]: undefined,
@@ -23,7 +23,7 @@ export default function Test4(){
     }
 
     const location = useLocation();
-
+    console.log(location.state)
     console.log(answerlist);
 
 
