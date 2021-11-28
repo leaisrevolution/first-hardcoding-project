@@ -61,17 +61,29 @@
 
 
 .title {
-  margin-top: 90px;
+  margin-top: 100px;
   color: #2884f7;
 }
 
 .title2 {
-  margin-top: 80px;
+  margin-top: 50px;
+  color: #2884f7;
+}
+
+.title3 {
+  margin-top: 30px;
+  color: #2884f7;
+}
+
+.pageNumbers {
+  flex: none;
+  margin: 20, 0, 50px;
+  float: right;
   color: #2884f7;
 }
 
 .content {
-  /* margin-top: 50px; */
+  margin-top: 150px;
   color: rgb(118, 118, 118);
 }
 
@@ -107,6 +119,10 @@
 .content {
   margin-top: 0.95rem;
   color: rgb(84, 84, 84);
+}
+
+.content2 {
+  margin-top: 30px;
 }
 
 .bar {
